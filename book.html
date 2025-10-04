@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment | Paradox Hospitals</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #201a4e;
+            --primary-light: #8b60ed;
+            --secondary-color: #f3f4f6;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --background-light: #ffffff;
+            --border-color: #e2e8f0;
+            --font-family: 'Poppins', 'Segoe UI', sans-serif;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font-family);
+        }
+
+        body {
+            background-color: #f9fafc;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to left, #8b60ed, #c3adf8);
+            padding: 20px 60px;
+        }
+
+        .logo img {
+            height: 140px;
+            width: 250px;
+        }
+
+        #logout-btn {
+            background-color: var(--primary-color);
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        #logout-btn:hover {
+            background-color: #3a2d80;
+            transform: scale(1.05);
+        }
+
+        .sub-nav {
+            background-color: var(--background-light);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 15px 0;
+        }
+
+        .sub-nav .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .sub-nav a {
+            color: var(--text-dark);
+            font-weight: 600;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .sub-nav a:hover,
+        .sub-nav a.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .search-doctors-section {
+            padding: 50px 0;
+        }
+
+        .search-doctors-section .container {
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 36px;
+            margin-bottom: 40px;
+            color: var(--primary-color);
+        }
+
+        #doctorSearch {
+            width: 100%;
+            max-width: 600px;
+            padding: 15px 20px;
+            font-size: 18px;
+            border-radius: 30px;
+            border: 2px solid var(--border-color);
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+
+        #doctorSearch:focus {
+            outline: none;
+            border-color: var(--primary-light);
+            box-shadow: 0 0 15px rgba(139, 96, 237, 0.2);
+        }
+
+        .filter-scroll-container {
+            overflow-x: auto;
+            padding-bottom: 15px;
+            margin-bottom: 50px;
+        }
+
+        .filter-scroll-container::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .filter-scroll-container::-webkit-scrollbar-track {
+            background: var(--secondary-color);
+            border-radius: 10px;
+        }
+
+        .filter-scroll-container::-webkit-scrollbar-thumb {
+            background-color: var(--primary-light);
+            border-radius: 10px;
+        }
+
+        .filter-buttons {
+            display: flex;
+            justify-content: flex-start;
+            gap: 15px;
+            flex-wrap: nowrap;
+            width: max-content;
+        }
+
+        .filter-btn {
+            background-color: var(--secondary-color);
+            border: 2px solid var(--border-color);
+            color: var(--text-dark);
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .filter-btn:hover {
+            background-color: var(--primary-light);
+            color: white;
+            border-color: var(--primary-light);
+        }
+
+        .filter-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .doctor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .doctor-card {
+            background: var(--background-light);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .doctor-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .doctor-card img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+        }
+
+        .doctor-info {
+            padding: 20px;
+        }
+
+        .doctor-info h3 {
+            font-size: 20px;
+            color: var(--primary-color);
+        }
+
+        .doctor-info p {
+            color: var(--text-light);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .book-btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .book-btn:hover {
+            background-color: #3a2d80;
+            transform: scale(1.05);
+        }
+
+        .footer {
+            background-color: var(--text-dark);
+            text-align: center;
+            padding: 20px;
+            color: #e2e8f0;
+            font-size: 14px;
+            margin-top: 60px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="logo">
+            <a href="home.html"><img src="paradox-logo.png" alt="Paradox Logo"></a>
+        </div>
+        <div class="user-nav">
+            <button id="logout-btn">Log Out</button>
+        </div>
+    </header>
+
+    <nav class="sub-nav">
+        <div class="container">
+            <a href="hospital.html">Home</a>
+            <a href="book.html" class="active">Book Appointment</a>
+            <a href="#">Hospital Blue Print</a>
+            <a href="#">Book Video Consultancy</a>
+            <a href="#">Order Food</a>
+            <a href="#">My Profile</a>
+        </div>
+    </nav>
+
+    <main class="search-doctors-section">
+        <div class="container">
+            <h2 class="section-title">Find Your Doctor</h2>
+            <input type="text" id="doctorSearch" placeholder="Search for a doctor by name...">
+
+            <div class="filter-scroll-container">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">All Specialists</button>
+                    <button class="filter-btn" data-filter="cardiology">Heart Specialist</button>
+                    <button class="filter-btn" data-filter="pediatrics">Kids Specialist</button>
+                    <button class="filter-btn" data-filter="neurology">Brain Specialist</button>
+                    <button class="filter-btn" data-filter="dermatology">Skin Specialist</button>
+                    <button class="filter-btn" data-filter="orthopedics">Bone Specialist</button>
+                    <button class="filter-btn" data-filter="ent">ENT Specialist</button>
+                </div>
+            </div>
+
+            <div class="doctor-grid">
+                <div class="doctor-card" data-specialty="cardiology">
+                    <img src="https://placehold.co/400x400/E0F2FE/1E293B?text=Dr.+Smith" alt="Dr. Smith">
+                    <div class="doctor-info">
+                        <h3>Dr. Smith</h3>
+                        <p>Cardiologist</p>
+                        <a href="#" class="book-btn"
+                           onclick="bookDoctor('Dr. Smith','Cardiologist','https://placehold.co/400x400/E0F2FE/1E293B?text=Dr.+Smith')">Book Appointment</a>
+                    </div>
+                </div>
+                <div class="doctor-card" data-specialty="pediatrics">
+                    <img src="https://placehold.co/400x400/D1FAE5/1E293B?text=Dr.+Bennet" alt="Dr. Bennet">
+                    <div class="doctor-info">
+                        <h3>Dr. Bennet</h3>
+                        <p>Pediatrician</p>
+                        <a href="#" class="book-btn"
+                           onclick="bookDoctor('Dr. Bennet','Pediatrician','https://placehold.co/400x400/D1FAE5/1E293B?text=Dr.+Bennet')">Book Appointment</a>
+                    </div>
+                </div>
+                <div class="doctor-card" data-specialty="neurology">
+                    <img src="https://placehold.co/400x400/FEF3C7/1E293B?text=Dr.+Patel" alt="Dr. Patel">
+                    <div class="doctor-info">
+                        <h3>Dr. Patel</h3>
+                        <p>Neurologist</p>
+                        <a href="#" class="book-btn"
+                           onclick="bookDoctor('Dr. Patel','Neurologist','https://placehold.co/400x400/FEF3C7/1E293B?text=Dr.+Patel')">Book Appointment</a>
+                    </div>
+                </div>
+                <div class="doctor-card" data-specialty="dermatology">
+                    <img src="https://placehold.co/400x400/E5E7EB/1E293B?text=Dr.+Lee" alt="Dr. Lee">
+                    <div class="doctor-info">
+                        <h3>Dr. Lee</h3>
+                        <p>Dermatologist</p>
+                        <a href="#" class="book-btn"
+                           onclick="bookDoctor('Dr. Lee','Dermatologist','https://placehold.co/400x400/E5E7EB/1E293B?text=Dr.+Lee')">Book Appointment</a>
+                    </div>
+                </div>
+                <div class="doctor-card" data-specialty="orthopedics">
+                    <img src="https://placehold.co/400x400/DBEAFE/1E293B?text=Dr.+Jones" alt="Dr. Jones">
+                    <div class="doctor-info">
+                        <h3>Dr. Jones</h3>
+                        <p>Orthopedist</p>
+                        <a href="#" class="book-btn"
+                           onclick="bookDoctor('Dr. Jones','Orthopedist','https://placehold.co/400x400/DBEAFE/1E293B?text=Dr.+Jones')">Book Appointment</a>
+                    </div>
+                </div>
+                <div class="doctor-card" data-specialty="ent">
+                    <img src="https://placehold.co/400x400/F3E8FF/1E293B?text=Dr.+Chen" alt="Dr. Chen">
+                    <div class="doctor-info">
+                        <h3>Dr. Chen</h3>
+                        <p>ENT Specialist</p>
+                        <a href="#" class="book-btn"
+                           onclick="bookDoctor('Dr. Chen','ENT Specialist','https://placehold.co/400x400/F3E8FF/1E293B?text=Dr.+Chen')">Book Appointment</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Paradox Hospitals. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('logout-btn').addEventListener('click', function () {
+                localStorage.removeItem('paradoxUserName');
+                window.location.href = 'index.html';
+            });
+
+            const searchInput = document.getElementById('doctorSearch');
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const doctorCards = document.querySelectorAll('.doctor-card');
+
+            function filterAndSearch() {
+                const searchQuery = searchInput.value.toLowerCase();
+                const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+
+                doctorCards.forEach(card => {
+                    const doctorName = card.querySelector('h3').textContent.toLowerCase();
+                    const doctorSpecialty = card.dataset.specialty;
+
+                    const nameMatch = doctorName.includes(searchQuery);
+                    const filterMatch = activeFilter === 'all' || doctorSpecialty === activeFilter;
+
+                    card.style.display = (nameMatch && filterMatch) ? 'block' : 'none';
+                });
+            }
+
+            searchInput.addEventListener('keyup', filterAndSearch);
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    filterAndSearch();
+                });
+            });
+        });
+
+        function bookDoctor(name, specialty, img) {
+            const url = `appointment.html?doctor=${encodeURIComponent(name)}&specialty=${encodeURIComponent(specialty)}&img=${encodeURIComponent(img)}`;
+            window.location.href = url;
+        }
+    </script>
+</body>
+
+</html>
