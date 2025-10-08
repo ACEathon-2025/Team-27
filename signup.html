@@ -6,17 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up | Paradox Hospitals</title>
 
-    <!-- Google Fonts: Poppins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
-    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="signup.css">
-</head>
-<style>
-    :root {
+    <style>
+      :root {
             --primary-color: #201a4e;
             --primary-gradient: linear-gradient(to right, #6028e5, #1f84cc);
             --secondary-color: #f3f4f6;
@@ -62,7 +58,6 @@
             padding: 0 20px;
         }
 
-        /* --- Header --- */
         .header {
             background-color: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(10px);
@@ -108,7 +103,6 @@
             text-decoration: none;
         }
 
-        /* --- Sign-Up Section --- */
         .signup-section {
             flex-grow: 1;
             display: flex;
@@ -198,7 +192,6 @@
             color: var(--text-light);
         }
         
-        /* --- Footer --- */
         .footer {
             background-color: var(--text-dark);
             color: var(--secondary-color);
@@ -214,14 +207,13 @@
             color: var(--background-light);
         }
         
-        /* Responsive */
         @media (max-width: 600px) {
             .signup-form .form-grid {
                 grid-template-columns: 1fr;
             }
         }
-
-</style>
+    </style>
+</head>
 
 <body>
     <header class="header">
@@ -239,7 +231,7 @@
         <div class="signup-card">
             <h1>Create Your Account</h1>
             <p>Join us to manage your health with ease.</p>
-            <form class="signup-form" id="signupForm" action="home.html" method="GET">
+            <form class="signup-form" id="signupForm">
                 <div class="form-grid">
                     <div class="form-group full-width">
                         <label for="full-name">Full Name</label>
@@ -292,24 +284,22 @@
         </div>
     </footer>
 
-    <script>
-        document.getElementById('signupForm').addEventListener('submit', function(event) {
-            // Prevent the form from submitting the default way
-            event.preventDefault();
+   <script>
+       document.getElementById('signupForm').addEventListener('submit', function(event) {
+           
+           event.preventDefault();
 
-            // Get the user's name from the input field
-            const userName = document.getElementById('full-name').value;
+           const userName = document.getElementById('full-name').value;
 
-            // Save the name to localStorage
-            if (userName) {
-                localStorage.setItem('paradoxUserName', userName);
-            }
+           localStorage.setItem('isLoggedIn', 'true');
 
-            // Redirect to the home page
-            window.location.href = 'home.html';
-        });
-    </script>
+           if (userName) {
+               localStorage.setItem('username', userName);
+           }
+
+           window.location.href = 'home.html';
+       });
+   </script>
 
 </body>
 </html>
-
