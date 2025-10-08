@@ -6,19 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign In | Paradox Hospitals</title>
 
-    <!-- Google Fonts: Poppins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
-    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="signin.css">
-</head>
-<style>
-    
-        /* --- Global Styles & Variables (from main page) --- */
-        :root {
+    <style>
+      :root {
             --primary-color: #201a4e;
             --primary-gradient: linear-gradient(to right, #6028e5, #1f84cc);
             --secondary-color: #f3f4f6;
@@ -64,7 +58,6 @@
             padding: 0 20px;
         }
 
-        /* --- Header --- */
         .header {
             background-color: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(10px);
@@ -109,7 +102,6 @@
             text-decoration: none;
         }
 
-        /* --- Sign-In Section --- */
         .signin-section {
             flex-grow: 1;
             display: flex;
@@ -188,7 +180,6 @@
             color: var(--text-light);
         }
         
-        /* --- Footer --- */
         .footer {
             background-color: var(--text-dark);
             color: var(--secondary-color);
@@ -200,8 +191,8 @@
             font-size: 14px;
             color: #a0aec0;
         }
-        
-</style>
+    </style>
+</head>
 
 <body>
     <header class="header">
@@ -219,7 +210,7 @@
         <div class="signin-card">
             <h1>Welcome Back!</h1>
             <p>Sign in to access your account.</p>
-            <form class="signin-form" id="signInForm" action="home.html" method="GET">
+            <form class="signin-form" id="signInForm">
                 <div class="form-group">
                     <label for="email">Email Address</label>
                     <input type="email" id="email" name="email" placeholder="you@example.com" required>
@@ -251,24 +242,17 @@
 
     <script>
         document.getElementById('signInForm').addEventListener('submit', function(event) {
-            // Prevent the form from submitting the default way
             event.preventDefault();
 
-            // Get the user's email from the input field
             const email = document.getElementById('email').value;
 
-            // For demonstration, we'll extract the name from the email (e.g., "john" from "john@example.com")
-            // In a real application, you would verify credentials and get the user's name from a database.
             let userName = email.split('@')[0];
-            // Capitalize the first letter
             userName = userName.charAt(0).toUpperCase() + userName.slice(1);
 
-            // Save the name to localStorage so the home page can greet them
-            if (userName) {
-                localStorage.setItem('paradoxUserName', userName);
-            }
+            localStorage.setItem('isLoggedIn', 'true');
 
-            // Redirect to the home page
+            localStorage.setItem('username', userName);
+            
             window.location.href = 'home.html';
         });
     </script>
