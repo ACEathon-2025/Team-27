@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile | Paradox Hospitals</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #201a4e;
+            --primary-light: #8b60ed;
+            --secondary-color: #f3f4f6;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --background-light: #ffffff;
+            --border-color: #e2e8f0;
+            --font-family: 'Poppins', 'Segoe UI', sans-serif;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font-family);
+        }
+
+        body {
+            background-color: #f9fafc;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to left, #8b60ed, #c3adf8);
+            padding: 20px 60px;
+        }
+
+        .logo img {
+            height: 140px;
+            width: 250px;
+        }
+        nav a{
+            text-decoration: none;
+        }
+        .sub-nav {
+    background-color: var(--background-light);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+        .sub-nav .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        .sub-nav a {
+            color: var(--text-dark);
+            font-weight: 600;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+        .sub-nav a:hover, .sub-nav a.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        #logout-btn {
+            background-color: var(--primary-color);
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        #logout-btn:hover {
+            background-color: #3a2d80;
+            transform: scale(1.05);
+        }
+
+        h2.section-title {
+            text-align: center;
+            font-size: 36px;
+            color: var(--primary-color);
+            margin-bottom: 40px;
+        }
+
+        .appointment-card {
+            background: var(--background-light);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            margin-bottom: 20px;
+            gap: 20px;
+        }
+
+        .appointment-card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .appointment-info h3 {
+            font-size: 20px;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .appointment-info p {
+            font-weight: 600;
+            margin: 2px 0;
+        }
+
+        .no-appointments {
+            text-align: center;
+            font-size: 20px;
+            color: var(--text-light);
+            margin-top: 50px;
+        }
+
+        .footer {
+            background-color: var(--text-dark);
+            text-align: center;
+            padding: 20px;
+            color: #e2e8f0;
+            font-size: 14px;
+            margin-top: 60px;
+        }
+
+        @media (max-width: 600px) {
+            .appointment-card {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="logo">
+            <a href="home.html"><img src="paradox-logo.png" alt="Paradox Logo"></a>
+        </div>
+        <div class="user-nav">
+            <button id="logout-btn">Log Out</button>
+        </div>
+    </header>
+    <nav class="sub-nav">
+        <div class="container">
+            <a href="home.html">Main Page</a>
+            <a href="hospital.html">Home</a>
+            <a href="book.html">Book Appointment</a>
+            <a href="blueprint.html">Hospital Blue Print</a>
+            <a href="video.html">Book Video Consultancy</a>
+            <a href="food.html">Order Food</a>
+            <a href="profile.html" class="active">My Profile</a>
+        </div>
+    </nav>
+    <main class="container">
+        <h2 class="section-title">My Appointments</h2>
+        <div id="appointments-list"></div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Paradox Hospitals. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Logout functionality
+            document.getElementById('logout-btn').addEventListener('click', function () {
+                localStorage.removeItem('paradoxUserName');
+                window.location.href = 'signin.html';
+            });
+
+            const appointmentsList = document.getElementById('appointments-list');
+            const appointments = JSON.parse(localStorage.getItem('appointments')) || [];
+
+            if (appointments.length === 0) {
+                appointmentsList.innerHTML = '<p class="no-appointments">You have no booked appointments yet.</p>';
+            } else {
+                appointments.forEach(app => {
+                    const card = document.createElement('div');
+                    card.classList.add('appointment-card');
+
+                    card.innerHTML = `
+                        <img src="${app.img}" alt="${app.doctor}">
+                        <div class="appointment-info">
+                            <h3>${app.doctor}</h3>
+                            <p>Specialty: ${app.specialty}</p>
+                            <p>Patient: ${app.patientName}</p>
+                            <p>Date: ${app.date}</p>
+                            <p>Time: ${app.time}</p>
+                            <p>Token No: ${app.token}</p>
+                        </div>
+                    `;
+
+                    appointmentsList.appendChild(card);
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Blueprint | Paradox Hospitals</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #201a4e;
+            --primary-light: #8b60ed;
+            --secondary-color: #f3f4f6;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --background-light: #ffffff;
+            --border-color: #e2e8f0;
+            --font-family: 'Poppins', 'Segoe UI', sans-serif;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font-family);
+        }
+
+        body {
+            background-color: #f9fafc;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to left, #8b60ed, #c3adf8);
+            padding: 20px 60px;
+        }
+
+         .logo img {
+            height: 140px;
+            width: 250px;
+        }
+
+        #logout-btn {
+            background-color: var(--primary-color);
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        #logout-btn:hover {
+            background-color: #3a2d80;
+            transform: scale(1.05);
+        }
+
+        .sub-nav {
+    background-color: var(--background-light);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+
+        .sub-nav .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .sub-nav a {
+            color: var(--text-dark);
+            font-weight: 600;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .sub-nav a:hover,
+        .sub-nav a.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .blueprint-section {
+            padding: 50px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 40px;
+            color: var(--primary-color);
+        }
+
+        .search-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--background-light);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .search-form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .search-form .form-group:first-of-type {
+            flex: 1 1 200px;
+        }
+
+        .search-form .form-group:nth-of-type(2) {
+            flex: 2 1 250px;
+        }
+
+        .search-form select,
+        .search-form input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        .search-form select:focus,
+        .search-form input:focus {
+            outline: none;
+            border-color: var(--primary-light);
+        }
+
+        .search-form button {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex-grow: 0;
+        }
+
+        .search-form button:hover {
+            background-color: #3a2d80;
+        }
+
+        #results-container {
+            margin-top: 40px;
+        }
+
+        .result-card {
+            background: var(--background-light);
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .result-card img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .result-info h3 {
+            font-size: 24px;
+            color: var(--primary-color);
+        }
+
+        .result-info p {
+            font-size: 18px;
+            color: var(--text-light);
+        }
+
+        .result-info .location {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .no-results {
+            text-align: center;
+            font-size: 18px;
+            color: var(--text-light);
+            font-weight: 600;
+            padding: 40px;
+        }
+
+        .footer {
+            background-color: var(--text-dark);
+            text-align: center;
+            padding: 20px;
+            color: #e2e8f0;
+            font-size: 14px;
+            margin-top: 60px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="logo">
+            <a href="home.html"><img src="paradox-logo.png" alt="Paradox Logo"></a>
+        </div>
+        <div class="user-nav">
+            <button id="logout-btn">Log Out</button>
+        </div>
+    </header>
+
+    <nav class="sub-nav">
+       <div class="container">
+            <a href="home.html">Main Page</a>
+            <a href="hospital.html">Home</a>
+            <a href="book.html">Book Appointment</a>
+            <a href="blueprint.html" class="active">Hospital Blue Print</a>
+            <a href="video.html">Book Video Consultancy</a>
+            <a href="food.html">Order Food</a>
+            <a href="profile.html">My Profile</a>
+        </div>
+    </nav>
+
+    <main class="blueprint-section container">
+        <h2 class="section-title">Hospital Blueprint & Directory</h2>
+        <div class="search-container">
+            <form id="blueprint-form" class="search-form">
+                <div class="form-group">
+                    <select id="filter-select">
+                        <option value="roomNumber">Search by Room Number</option>
+                        <option value="doctorName">Search by Doctor Name</option>
+                        <option value="roomName">Search by Room Name</option>
+                        <option value="patientName">Search by Patient Name</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="search-input" list="" placeholder="Enter Room Number..." required>
+                </div>
+                <button type="submit">Search</button>
+            </form>
+        </div>
+
+        <div id="results-container">
+
+        </div>
+    </main>
+
+    <datalist id="roomNumber-list">
+        <option value="113"></option>
+        <option value="205"></option>
+        <option value="410"></option>
+    </datalist>
+    <datalist id="doctorName-list">
+        <option value="Dr. Emily Carter"></option>
+        <option value="Dr. Ben Bennet"></option>
+        <option value="Dr. Aisha Patel"></option>
+    </datalist>
+    <datalist id="roomName-list">
+        <option value="ICU"></option>
+        <option value="Scanning Room"></option>
+        <option value="Emergency Ward"></option>
+    </datalist>
+    <datalist id="patientName-list">
+        <option value="John Doe"></option>
+        <option value="Jane Smith"></option>
+    </datalist>
+
+    <footer class="footer">
+        <p>&copy; 2025 Paradox Hospitals. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const mockData = {
+                roomNumber: {
+                    '113': { title: 'Room Number 113', location: '1st Floor, General Ward, Wing B', img: 'https://placehold.co/150x150/8b60ed/ffffff?text=113' },
+                    '205': { title: 'Room Number 205', location: '2nd Floor, Cardiology Dept, Wing A', img: 'https://placehold.co/150x150/8b60ed/ffffff?text=205' },
+                    '410': { title: 'Room Number 410', location: '4th Floor, Pediatrics, Near West Elevator', img: 'https://placehold.co/150x150/8b60ed/ffffff?text=410' },
+                },
+                doctorName: {
+                    'Dr. Emily Carter': { title: 'Dr. Emily Carter', location: 'Cabin is on the 2nd Floor, Wing A, Room 202', img: 'https://placehold.co/150x150/E0F2FE/1E293B?text=Dr.+C' },
+                    'Dr. Ben Bennet': { title: 'Dr. Ben Bennet', location: 'Cabin is on the 4th Floor, Pediatrics, Room 401', img: 'https://placehold.co/150x150/D1FAE5/1E293B?text=Dr.+B' },
+                    'Dr. Aisha Patel': { title: 'Dr. Aisha Patel', location: 'Cabin is on the 3rd Floor, Neurology Dept, Room 315', img: 'https://placehold.co/150x150/FEF3C7/1E293B?text=Dr.+P' },
+                },
+                roomName: {
+                    'ICU': { title: 'Intensive Care Unit (ICU)', location: 'Ground Floor, East Wing, past the ER', img: 'https://placehold.co/150x150/FEE2E2/1E293B?text=ICU' },
+                    'Scanning Room': { title: 'MRI & CT Scans', location: 'Basement Level 1, Radiology Department', img: 'https://placehold.co/150x150/E5E7EB/1E293B?text=Scan' },
+                    'Emergency Ward': { title: 'Emergency Ward', location: 'Ground Floor, Main Entrance', img: 'https://placehold.co/150x150/DBEAFE/1E293B?text=ER' },
+                },
+                patientName: {
+                    'John Doe': { title: 'John Doe', location: 'Currently in Room 113, General Ward', img: 'https://placehold.co/150x150/dbeafe/201a4e?text=JD' },
+                    'Jane Smith': { title: 'Jane Smith', location: 'Currently in Room 410, Pediatrics', img: 'https://placehold.co/150x150/d1fae5/201a4e?text=JS' },
+                }
+            };
+
+            const filterSelect = document.getElementById('filter-select');
+            const searchInput = document.getElementById('search-input');
+            const blueprintForm = document.getElementById('blueprint-form');
+            const resultsContainer = document.getElementById('results-container');
+            const logoutBtn = document.getElementById('logout-btn');
+
+            logoutBtn.addEventListener('click', () => {
+                localStorage.removeItem('paradoxUserName');
+                window.location.href = 'signin.html';
+            });
+
+            filterSelect.addEventListener('change', updateSearchUI);
+            blueprintForm.addEventListener('submit', handleSearch);
+
+            function updateSearchUI() {
+                const selectedFilter = filterSelect.value;
+                const placeholders = {
+                    roomNumber: 'Enter Room Number...',
+                    doctorName: 'Enter Doctor\'s Name...',
+                    roomName: 'Enter Room Name (e.g., ICU)...',
+                    patientName: 'Enter Patient\'s Name...'
+                };
+                searchInput.placeholder = placeholders[selectedFilter];
+                searchInput.value = ''; // Clear input on filter change
+                searchInput.setAttribute('list', `${selectedFilter}-list`);
+                resultsContainer.innerHTML = ''; // Clear results on filter change
+            }
+
+            function handleSearch(e) {
+                e.preventDefault();
+                const filter = filterSelect.value;
+                const query = searchInput.value;
+                const resultData = mockData[filter][query];
+
+                displayResult(resultData);
+            }
+
+            function displayResult(data) {
+                if (data) {
+                    resultsContainer.innerHTML = `
+                        <div class="result-card">
+                            <img src="${data.img}" alt="${data.title}">
+                            <div class="result-info">
+                                <h3>${data.title}</h3>
+                                <p><strong>Location:</strong> <span class="location">${data.location}</span></p>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    resultsContainer.innerHTML = `<p class="no-results">Sorry, no results found for your query.</p>`;
+                }
+            }
+            updateSearchUI();
+        });
+    </script>
+</body>
+
+</html>
