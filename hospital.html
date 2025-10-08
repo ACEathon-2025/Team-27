@@ -67,10 +67,15 @@
             transform: scale(1.05);
         }
         .sub-nav {
-            background-color: var(--background-light);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            padding: 15px 0;
-        }
+    background-color: var(--background-light);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
         .sub-nav .container {
             display: flex;
             justify-content: center;
@@ -181,12 +186,13 @@
 
     <nav class="sub-nav">
         <div class="container">
+            <a href="home.html">Main Page</a>
             <a href="#" class="active">Home</a>
             <a href="book.html">Book Appointment</a>
-            <a href="#">Hospital Blue Print</a>
-            <a href="#">Book Video Consultancy</a>
-            <a href="#">Order Food</a>
-            <a href="#">My Profile</a>
+            <a href="blueprint.html">Hospital Blue Print</a>
+            <a href="video.html">Book Video Consultancy</a>
+            <a href="food.html">Order Food</a>
+            <a href="profile.html">My Profile</a>
         </div>
     </nav>
 
