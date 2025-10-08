@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,23 +10,19 @@
       box-sizing: border-box;
       font-family: 'Segoe UI', sans-serif;
     }
-
     body {
       background-color: #f9fafc;
       color: #1e293b;
       line-height: 1.6;
     }
-
     a {
       text-decoration: none;
       color: inherit;
     }
-
     .logo img {
       height: 140px;
       width: 250px;
     }
-
     .head {
       display: flex;
       justify-content: space-between;
@@ -35,12 +30,10 @@
       background: linear-gradient(to left, #8b60ed, #c3adf8);
       padding: 20px 60px;
     }
-
     .sign {
       display: flex;
       gap: 15px;
     }
-
     .in,
     .up {
       background-color: #201a4e;
@@ -49,60 +42,49 @@
       font-weight: bold;
       transition: 0.3s ease;
     }
-
     .in a,
     .up a {
       color: #fff;
     }
-
     .in:hover,
     .up:hover {
       background-color: #3a2d80;
       transform: scale(1.05);
     }
-
     .in.transparent {
       background-color: transparent;
       border: 2px solid #201a4e;
     }
-
     .in.transparent a {
       color: #201a4e;
     }
-
     .in.transparent:hover {
       background-color: white;
     }
-
     main {
       text-align: center;
       margin: 100px 20px 30px;
     }
-
     main h1 {
       font-size: 50px;
       color: #201a4e;
     }
-
     main h1 span {
       background: linear-gradient(to right, #8b60ed, #d944c5);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       font-weight: bold;
     }
-
     .text {
       margin-top: 20px;
       font-size: 24px;
       font-weight: bold;
       color: #8b60ed;
     }
-
     .search-section {
       text-align: center;
       margin: 30px 0;
     }
-
     #hospitalSearch {
       width: 100%;
       max-width: 600px;
@@ -112,13 +94,11 @@
       border: 2px solid #e2e8f0;
       transition: all 0.3s ease;
     }
-
     #hospitalSearch:focus {
       outline: none;
       border-color: #8b60ed;
       box-shadow: 0 0 15px rgba(139, 96, 237, 0.2);
     }
-
     .call {
       background: linear-gradient(to left, #0f0f0f, #f72905);
       height: 90px;
@@ -131,18 +111,15 @@
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
       transition: 0.3s ease;
     }
-
     .call:hover {
       transform: scale(1.1);
     }
-
     .call p {
       margin-top: 30px;
       font-weight: bold;
       font-size: 22px;
       color: white;
     }
-
     .poster {
       margin: 65px auto;
       display: flex;
@@ -150,7 +127,6 @@
       gap: 30px;
       justify-content: center;
     }
-
     .poster div {
       background: #fff;
       height: 300px;
@@ -163,18 +139,15 @@
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-
     .poster div:hover {
       transform: translateY(-8px);
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
     }
-
     .poster div img {
       height: 180px;
       width: 100%;
       object-fit: cover;
     }
-
     .poster div span {
       color: #201a4e;
       font-size: 18px;
@@ -182,7 +155,6 @@
       margin: 15px 0;
       text-align: center;
     }
-
     .why {
       background: linear-gradient(to right, #63f3e4, #8b60ed);
       margin: 50px auto;
@@ -192,16 +164,13 @@
       text-align: center;
       max-width: 900px;
     }
-
     .why h2 {
       font-size: 36px;
       margin-bottom: 15px;
     }
-
     .why p {
       font-size: 18px;
     }
-
     .foot {
       display: flex;
       flex-wrap: wrap;
@@ -212,25 +181,21 @@
       color: white;
       gap: 30px;
     }
-
     .details h3,
     .contact h3,
     .link h3 {
       font-size: 22px;
       margin-bottom: 15px;
     }
-
     .foot p,
     .foot a {
       font-size: 16px;
       margin-top: 8px;
       color: #e2e8f0;
     }
-
     .foot a:hover {
       color: #63f3e4;
     }
-
     .last {
       background-color: #1e293b;
       text-align: center;
@@ -238,11 +203,9 @@
       color: #e2e8f0;
       font-size: 14px;
     }
-
     .last a {
       color: #63f3e4;
     }
-
     .view-hospital-btn {
       display: inline-block;
       background-color: #201a4e;
@@ -255,23 +218,71 @@
       transition: all 0.3s ease;
       text-align: center;
     }
-
     .view-hospital-btn:hover {
       background-color: #3a2d80;
       transform: scale(1.05);
       color: white;
     }
+
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .popup {
+      background: #fff;
+      padding: 40px 30px;
+      border-radius: 12px;
+      text-align: center;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      animation: popupFade 0.3s ease;
+    }
+    .popup h3 {
+      color: #201a4e;
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+    .popup .btn-group {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+    .popup button {
+      background-color: #201a4e;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+    .popup button:hover {
+      background-color: #3a2d80;
+      transform: scale(1.05);
+    }
+    @keyframes popupFade {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
   </style>
 </head>
-
 <body>
   <header>
     <div class="head">
       <div class="logo">
         <img src="paradox-logo.png" alt="Paradise Logo">
       </div>
-      <div class="sign" id="authButtonsContainer">
-      </div>
+      <div class="sign" id="authButtonsContainer"></div>
     </div>
   </header>
 
@@ -295,21 +306,19 @@
   <nav>
     <div class="poster" id="hospitalList">
       <div>
-        <img
-          src="https://images.financialexpressdigital.com/2022/08/Manipal-Hospitals-expands-footprint-with-new-facility-in-Pune.jpg"
-          alt="">
+        <img src="https://images.financialexpressdigital.com/2022/08/Manipal-Hospitals-expands-footprint-with-new-facility-in-Pune.jpg" alt="">
         <span>Manipal Hospital</span>
         <a href="hospital.html" class="view-hospital-btn">View Hospital</a>
       </div>
       <div>
         <img src="https://placehold.co/280x180/E0F2FE/1E293B?text=Apollo+Hospital" alt="">
         <span>Apollo Hospital</span>
-        <a href="#" class="view-hospital-btn">View Hospital</a>
+        <a href="hospital.html" class="view-hospital-btn">View Hospital</a>
       </div>
       <div>
         <img src="https://placehold.co/280x180/D1FAE5/1E293B?text=Fortis+Healthcare" alt="">
         <span>Fortis Healthcare</span>
-        <a href="#" class="view-hospital-btn">View Hospital</a>
+        <a href="hospital.html" class="view-hospital-btn">View Hospital</a>
       </div>
     </div>
   </nav>
@@ -317,8 +326,7 @@
   <nav>
     <div class="why">
       <h2>Why Choose Us?</h2>
-      <p>We provide world-class facilities, expert doctors, and compassionate care
-        to ensure the well-being of our patients.</p>
+      <p>We provide world-class facilities, expert doctors, and compassionate care to ensure the well-being of our patients.</p>
     </div>
   </nav>
 
@@ -347,11 +355,22 @@
     </div>
   </footer>
 
+  <!-- Popup Overlay -->
+  <div class="overlay" id="popupOverlay">
+    <div class="popup">
+      <h3>To access this feature, please log in or create an account.</h3>
+      <div class="btn-group">
+        <button onclick="window.location.href='Signin.html'">Sign In</button>
+        <button onclick="window.location.href='Signup.html'">Sign Up</button>
+      </div>
+    </div>
+  </div>
+
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const authContainer = document.getElementById('authButtonsContainer');
       const welcomeMessage = document.getElementById('welcomeMessage');
-
+      const popupOverlay = document.getElementById('popupOverlay');
       const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
       const username = localStorage.getItem('username');
 
@@ -359,41 +378,43 @@
         if (username) {
           welcomeMessage.innerHTML = `Welcome, <span>${username}</span>`;
         }
-
         authContainer.innerHTML = '<div class="in"><a href="#" id="logoutBtn">Log Out</a></div>';
-
-        const logoutBtn = document.getElementById('logoutBtn');
-        logoutBtn.addEventListener('click', (event) => {
-          event.preventDefault();
+        document.getElementById('logoutBtn').addEventListener('click', (e) => {
+          e.preventDefault();
           localStorage.removeItem('isLoggedIn');
           localStorage.removeItem('username');
           window.location.href = 'index.html';
         });
-
       } else {
         authContainer.innerHTML = `
-                <div class="in transparent"><a href="Signin.html">Sign In</a></div>
-                <div class="up"><a href="Signup.html">Sign Up</a></div>
-            `;
+          <div class="in transparent"><a href="Signin.html">Sign In</a></div>
+          <div class="up"><a href="Signup.html">Sign Up</a></div>
+        `;
+        const viewButtons = document.querySelectorAll('.view-hospital-btn');
+        viewButtons.forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            popupOverlay.style.display = 'flex';
+          });
+        });
       }
-    });
 
+      const searchInput = document.getElementById('hospitalSearch');
+      const hospitalCards = document.querySelectorAll('#hospitalList > div');
+      searchInput.addEventListener('keyup', function (e) {
+        const query = e.target.value.toLowerCase();
+        hospitalCards.forEach(card => {
+          const name = card.querySelector('span').textContent.toLowerCase();
+          card.style.display = name.includes(query) ? 'flex' : 'none';
+        });
+      });
 
-    const searchInput = document.getElementById('hospitalSearch');
-    const hospitalCards = document.querySelectorAll('#hospitalList > div');
-    searchInput.addEventListener('keyup', function (e) {
-      const query = e.target.value.toLowerCase();
-      hospitalCards.forEach(card => {
-        const name = card.querySelector('span').textContent.toLowerCase();
-        if (name.includes(query)) {
-          card.style.display = 'flex';
-        } else {
-          card.style.display = 'none';
+      popupOverlay.addEventListener('click', (e) => {
+        if (e.target === popupOverlay) {
+          popupOverlay.style.display = 'none';
         }
       });
     });
   </script>
-
 </body>
-
 </html>
