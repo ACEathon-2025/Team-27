@@ -5,11 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paradox Hospital</title>
-    <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<style>
-    * {
+    <style>
+      * {
       margin: 0;
       box-sizing: border-box;
       font-family: 'Segoe UI', sans-serif;
@@ -52,7 +50,7 @@ background: linear-gradient(to top right,#81d6f5,white);
       font-weight: bold;
       transition: 0.3s ease;
     }
-     .in{
+      .in{
         background-color: transparent;
         color:#201a4e;
         font-weight: bold;
@@ -130,7 +128,7 @@ main p{
 
 .call:hover {
   transform: translateY(-8px);
-  
+ 
 }
 
 .call p {
@@ -196,7 +194,7 @@ main p{
         font-weight: bold;
         color: var(--text-dark);
     }
-    
+   
     .author-detail {
         font-size: 14px;
         color: var(--text-light);
@@ -329,7 +327,7 @@ main p{
         flex-direction: column;
         align-items: center;
     }
-    
+   
     .numbers p{
         font-size: 20px;
     }
@@ -369,7 +367,7 @@ main p{
       .numbers{
         margin-top: 0px;
       }
-       .numbers p{
+        .numbers p{
         font-size: 10px;
     }
     .quantity{
@@ -393,8 +391,8 @@ main p{
 
     }
 
-
-</style>
+    </style>
+</head>
 
 <body>
     <header>
@@ -412,11 +410,11 @@ main p{
     <main>
         <div>
             <h1>Welcome to <span>Paradox Hospital </span></h1>
-            <a href="Signup.html">
-                <p>Seamlessly manage appointments, track your health records, and connect with top doctors, all in one
-                    place.</p>
-                <p class="text">Get Started Today</p>
-            </a>
+            <p>Seamlessly manage appointments, track your health records, and connect with top doctors, all in one
+                place.</p>
+                <a href="home.html" id="getStartedLink">
+                    <p class="text">Get Started Today</p>
+                </a>
         </div>
     </main>
     <section>
@@ -547,10 +545,11 @@ main p{
         </div>
     </section>
 
-    <section <a href="tel:112">
-        <div class="call">
-            <p>SOS</p>
-        </div>
+    <section>
+        <a href="tel:112">
+            <div class="call">
+                <p>SOS</p>
+            </div>
         </a>
     </section>
 
@@ -582,40 +581,42 @@ main p{
         </div>
     </footer>
     <script>
+        // --- Counter Animation (No changes needed here) ---
         function animateValue(obj, start, end, duration) {
-    let startTimestamp = null;
-    const step = (timestamp) => {
-        if (!startTimestamp) startTimestamp = timestamp;
-        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-        const currentValue = Math.floor(progress * (end - start) + start);
-        obj.textContent = currentValue;
-        if (progress < 1) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const currentValue = Math.floor(progress * (end - start) + start);
+                obj.textContent = currentValue;
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                } else {
+                    obj.textContent = end;
+                }
+            };
             window.requestAnimationFrame(step);
-        } else {
-            obj.textContent = end;
         }
-    };
-    window.requestAnimationFrame(step);
-}
 
-const statsSection = document.getElementById('stats-numbers');
-const counters = document.querySelectorAll('.counter');
-
-const observer = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            counters.forEach(counter => {
-                const goal = parseInt(counter.getAttribute('data-goal'));
-                animateValue(counter, 0, goal, 3000); 
+        const statsSection = document.getElementById('stats-numbers');
+        const counters = document.querySelectorAll('.counter');
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    counters.forEach(counter => {
+                        const goal = parseInt(counter.getAttribute('data-goal'));
+                        animateValue(counter, 0, goal, 3000);
+                    });
+                    observer.unobserve(statsSection);
+                }
             });
-            observer.unobserve(statsSection);
-        }
-    });
-}, {
-    threshold: 0.5 
-});
-
-observer.observe(statsSection);
+        }, { threshold: 0.5 });
+        observer.observe(statsSection);
+        const getStartedLink = document.getElementById('getStartedLink');
+        getStartedLink.addEventListener('click', () => {
+            localStorage.setItem('isLoggedIn', 'false');
+            localStorage.removeItem('username');
+        });
     </script>
 </body>
 
