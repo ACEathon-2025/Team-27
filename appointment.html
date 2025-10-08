@@ -274,7 +274,6 @@
                 window.location.href = 'signin.html';
             });
 
-            // Get doctor's details from URL
             const params = new URLSearchParams(window.location.search);
             const doctorName = params.get('doctor') || "No Doctor Selected";
             const doctorSpecialty = params.get('specialty') || "";
@@ -284,7 +283,6 @@
             document.getElementById('doctor-specialty').textContent = doctorSpecialty;
             document.getElementById('doctor-image').src = doctorImg;
 
-            // Age calculation
             const dobInput = document.getElementById('dob');
             const ageInput = document.getElementById('age');
             dobInput.addEventListener('change', function () {
@@ -301,7 +299,6 @@
             const dateInput = document.getElementById('date');
             const timeSelect = document.getElementById('time');
 
-            // Unavailable dates
             const unavailableDates = ["2025-10-10", "2025-10-12", "2025-10-15"];
             const timeSlots = ["09:00 AM - 10:00 AM", "10:00 AM - 11:00 AM", "11:00 AM - 12:00 PM", "02:00 PM - 03:00 PM"];
 
@@ -322,7 +319,6 @@
                 });
             });
 
-            // Token number management
             if (!localStorage.getItem('appointmentToken')) {
                 localStorage.setItem('appointmentToken', '1');
             }
@@ -334,7 +330,6 @@
                 const tokenNumber = localStorage.getItem('appointmentToken');
                 document.getElementById('token-info').textContent = `Your appointment has been booked. Token No: ${tokenNumber}`;
                 
-                // Increment token
                 localStorage.setItem('appointmentToken', parseInt(tokenNumber) + 1);
 
                 document.getElementById('booking-form-content').style.display = 'none';
