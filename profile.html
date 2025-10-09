@@ -50,18 +50,19 @@
             height: 140px;
             width: 250px;
         }
-        nav a{
+
+        nav a {
             text-decoration: none;
         }
+
         .sub-nav {
-    background-color: var(--background-light);
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    padding: 15px 0;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    transition: box-shadow 0.3s ease, background-color 0.3s ease;
-}
+            background-color: var(--background-light);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
 
         .sub-nav .container {
             display: flex;
@@ -70,6 +71,7 @@
             flex-wrap: wrap;
             gap: 30px;
         }
+
         .sub-nav a {
             color: var(--text-dark);
             font-weight: 600;
@@ -77,10 +79,13 @@
             border-radius: 6px;
             transition: all 0.3s ease;
         }
-        .sub-nav a:hover, .sub-nav a.active {
+
+        .sub-nav a:hover,
+        .sub-nav a.active {
             background-color: var(--primary-color);
             color: white;
         }
+
         #logout-btn {
             background-color: var(--primary-color);
             padding: 10px 20px;
@@ -110,9 +115,18 @@
             box-shadow: var(--shadow);
             display: flex;
             align-items: center;
+            justify-content: space-between;
             padding: 20px;
             margin-bottom: 20px;
             gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .appointment-details {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-grow: 1;
         }
 
         .appointment-card img {
@@ -140,6 +154,22 @@
             margin-top: 50px;
         }
 
+        .status-btn {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .status-btn:hover {
+            background-color: #3a2d80;
+        }
+
         .footer {
             background-color: var(--text-dark);
             text-align: center;
@@ -160,12 +190,8 @@
 
 <body>
     <header class="header">
-        <div class="logo">
-            <a href="home.html"><img src="paradox-logo.png" alt="Paradox Logo"></a>
-        </div>
-        <div class="user-nav">
-            <button id="logout-btn">Log Out</button>
-        </div>
+        <div class="logo"><a href="home.html"><img src="paradox-logo.png" alt="Paradox Logo"></a></div>
+        <div class="user-nav"><button id="logout-btn">Log Out</button></div>
     </header>
     <nav class="sub-nav">
         <div class="container">
@@ -179,47 +205,67 @@
         </div>
     </nav>
     <main class="container">
-        <h2 class="section-title">My Appointments</h2>
+        <h2 class="section-title" id="profile-title">My Appointments</h2>
         <div id="appointments-list"></div>
     </main>
-
     <footer class="footer">
         <p>&copy; 2025 Paradox Hospitals. All rights reserved.</p>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Logout functionality
-            document.getElementById('logout-btn').addEventListener('click', function () {
-                localStorage.removeItem('paradoxUserName');
-                window.location.href = 'signin.html';
-            });
+            document.getElementById('logout-btn').addEventListener('click', function () { localStorage.clear(); window.location.href = 'signin.html'; });
+
+            const selectedHospital = localStorage.getItem('selectedHospital') || 'Paradox General';
+            document.getElementById('profile-title').textContent = `My Appointments at ${selectedHospital}`;
+
+            const allAppointments = JSON.parse(localStorage.getItem('appointments')) || [];
+            const hospitalSpecificAppointments = allAppointments.filter(app => app.hospitalName === selectedHospital);
 
             const appointmentsList = document.getElementById('appointments-list');
-            const appointments = JSON.parse(localStorage.getItem('appointments')) || [];
 
-            if (appointments.length === 0) {
-                appointmentsList.innerHTML = '<p class="no-appointments">You have no booked appointments yet.</p>';
+            if (hospitalSpecificAppointments.length === 0) {
+                appointmentsList.innerHTML = `<p class="no-appointments">You have no booked appointments at ${selectedHospital} yet.</p>`;
             } else {
-                appointments.forEach(app => {
+                appointmentsList.innerHTML = '';
+                const today = new Date();
+                const d = String(today.getDate()).padStart(2, '0');
+                const m = String(today.getMonth() + 1).padStart(2, '0');
+                const y = today.getFullYear();
+                const todayFormatted = `${d}-${m}-${y}`;
+
+                hospitalSpecificAppointments.forEach((app, index) => {
+                    let tokenHTML = '';
+                    if (app.date === todayFormatted) {
+                        tokenHTML = `<p><strong>Token No:</strong> ${app.token}</p>`;
+                    }
                     const card = document.createElement('div');
                     card.classList.add('appointment-card');
-
                     card.innerHTML = `
-                        <img src="${app.img}" alt="${app.doctor}">
-                        <div class="appointment-info">
-                            <h3>${app.doctor}</h3>
-                            <p>Specialty: ${app.specialty}</p>
-                            <p>Patient: ${app.patientName}</p>
-                            <p>Date: ${app.date}</p>
-                            <p>Time: ${app.time}</p>
-                            <p>Token No: ${app.token}</p>
+                        <div class="appointment-details">
+                            <img src="${app.img}" alt="${app.doctor}">
+                            <div class="appointment-info">
+                                <h3>${app.doctor}</h3>
+                                <p>${app.specialty}</p>
+                                <p><strong>Patient:</strong> ${app.patientName}</p>
+                                <p><strong>Date:</strong> ${app.date}</p>
+                                ${tokenHTML}
+                            </div>
                         </div>
+                        <button class="status-btn" data-index="${index}">Check Status</button>
                     `;
-
                     appointmentsList.appendChild(card);
                 });
             }
+
+            appointmentsList.addEventListener('click', function (event) {
+                if (event.target.classList.contains('status-btn')) {
+                    const appointmentIndex = event.target.getAttribute('data-index');
+                    const selectedAppointment = hospitalSpecificAppointments[appointmentIndex];
+                    localStorage.setItem('selectedAppointment', JSON.stringify(selectedAppointment));
+                    window.location.href = 'analytic.html';
+                }
+            });
         });
     </script>
 </body>
