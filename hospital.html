@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hospital Details | Paradox Hospitals</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="hospital.css">
-</head>
-<style>
-    
+    <style>
         :root {
             --primary-color: #201a4e;
             --primary-light: #8b60ed;
@@ -21,26 +19,31 @@
             --font-family: 'Poppins', 'Segoe UI', sans-serif;
             --shadow: 0 4px_20px rgba(0, 0, 0, 0.07);
         }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: var(--font-family);
         }
+
         body {
             background-color: #f9fafc;
             color: var(--text-dark);
             line-height: 1.6;
         }
-        body a{
+
+        body a {
             text-decoration: none;
 
         }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
+
         .header {
             display: flex;
             justify-content: space-between;
@@ -48,10 +51,12 @@
             background: linear-gradient(to left, #8b60ed, #c3adf8);
             padding: 20px 60px;
         }
-       .logo img {
-  height: 140px;
-  width: 250px;
-}
+
+        .logo img {
+            height: 140px;
+            width: 250px;
+        }
+
         #logout-btn {
             background-color: var(--primary-color);
             padding: 10px 20px;
@@ -62,19 +67,21 @@
             cursor: pointer;
             transition: 0.3s ease;
         }
+
         #logout-btn:hover {
             background-color: #3a2d80;
             transform: scale(1.05);
         }
+
         .sub-nav {
-    background-color: var(--background-light);
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    padding: 15px 0;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    transition: box-shadow 0.3s ease, background-color 0.3s ease;
-}
+            background-color: var(--background-light);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: box-shadow 0.3s ease, background-color 0.3s ease;
+        }
 
         .sub-nav .container {
             display: flex;
@@ -83,6 +90,7 @@
             flex-wrap: wrap;
             gap: 30px;
         }
+
         .sub-nav a {
             color: var(--text-dark);
             font-weight: 600;
@@ -90,14 +98,18 @@
             border-radius: 6px;
             transition: all 0.3s ease;
         }
-        .sub-nav a:hover, .sub-nav a.active {
+
+        .sub-nav a:hover,
+        .sub-nav a.active {
             background-color: var(--primary-color);
             color: white;
         }
+
         .hospital-poster {
             margin-top: 40px;
             text-align: center;
         }
+
         .hospital-poster img {
             width: 100%;
             max-height: 400px;
@@ -105,15 +117,21 @@
             border-radius: 12px;
             box-shadow: var(--shadow);
         }
-            .analytics-section, .services-section {
+
+        .analytics-section,
+        .services-section {
             padding: 60px 0;
         }
-        .analytics-grid, .services-grid {
+
+        .analytics-grid,
+        .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 30px;
         }
-        .analytic-card, .service-card {
+
+        .analytic-card,
+        .service-card {
             background: var(--background-light);
             padding: 30px;
             text-align: center;
@@ -121,33 +139,43 @@
             box-shadow: var(--shadow);
             transition: transform 0.3s ease;
         }
-        .analytic-card:hover, .service-card:hover {
+
+        .analytic-card:hover,
+        .service-card:hover {
             transform: translateY(-5px);
         }
-        .analytic-card i, .service-card i {
+
+        .analytic-card i,
+        .service-card i {
             font-size: 36px;
             color: var(--primary-light);
             margin-bottom: 15px;
         }
+
         .analytic-card h3 {
             font-size: 40px;
             color: var(--primary-color);
         }
-        .analytic-card p, .service-card p {
+
+        .analytic-card p,
+        .service-card p {
             color: var(--text-light);
             font-weight: 600;
         }
+
         .service-card h3 {
             font-size: 20px;
             margin-bottom: 10px;
             color: var(--primary-color);
         }
+
         .section-title {
             text-align: center;
             font-size: 36px;
             margin-bottom: 40px;
             color: var(--primary-color);
         }
+
         .footer {
             background-color: var(--text-dark);
             text-align: center;
@@ -156,20 +184,24 @@
             font-size: 14px;
             margin-top: 60px;
         }
+
         @media (max-width: 768px) {
             .header {
                 padding: 20px 30px;
             }
+
             .sub-nav .container {
                 gap: 15px;
                 justify-content: center;
             }
+
             .sub-nav a {
                 font-size: 14px;
             }
         }
-    
-</style>
+    </style>
+</head>
+
 <body>
 
     <header class="header">
@@ -179,15 +211,14 @@
             </a>
         </div>
         <div class="user-nav">
-            <button id="logout-btn" onclick="location.href='index.html'">Log Out</button>
-
+            <button id="logout-btn">Log Out</button>
         </div>
     </header>
 
     <nav class="sub-nav">
         <div class="container">
             <a href="home.html">Main Page</a>
-            <a href="#" class="active">Home</a>
+            <a href="hospital.html" class="active">Home</a>
             <a href="book.html">Book Appointment</a>
             <a href="blueprint.html">Hospital Blue Print</a>
             <a href="video.html">Book Video Consultancy</a>
@@ -198,11 +229,12 @@
 
     <main class="container">
         <section class="hospital-poster">
-            <img src="https://placehold.co/1200x400/8b60ed/ffffff?text=Manipal+Hospital+Banner" alt="Large poster of the hospital">
+            <img id="hospital-banner" src="https://placehold.co/1200x400/8b60ed/ffffff?text=Welcome"
+                alt="Large poster of the hospital">
         </section>
 
         <section class="analytics-section">
-            <h2 class="section-title">Hospital Analytics</h2>
+            <h2 class="section-title" id="analytics-title">Hospital Analytics</h2>
             <div class="analytics-grid">
                 <div class="analytic-card">
                     <i class="fa-solid fa-user-doctor"></i>
@@ -219,14 +251,14 @@
                     <h3>48</h3>
                     <p>Rooms Available</p>
                 </div>
-                 <div class="analytic-card">
+                <div class="analytic-card">
                     <i class="fa-solid fa-truck-medical"></i>
                     <h3>22</h3>
                     <p>Ambulances on Standby</p>
                 </div>
             </div>
         </section>
-        
+
         <section class="services-section">
             <h2 class="section-title">Services Offered</h2>
             <div class="services-grid">
@@ -245,7 +277,7 @@
                     <h3>Orthopedics</h3>
                     <p>Comprehensive care for bone, joint, and muscle injuries.</p>
                 </div>
-                 <div class="service-card">
+                <div class="service-card">
                     <i class="fa-solid fa-star-of-life"></i>
                     <h3>Emergency Care</h3>
                     <p>24/7 critical care services for all medical emergencies.</p>
@@ -258,5 +290,26 @@
         <p>&copy; 2025 Paradox Hospitals. All rights reserved.</p>
     </footer>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const selectedHospital = localStorage.getItem('selectedHospital');
+
+            if (selectedHospital) {
+                document.title = `${selectedHospital} | Paradox Hospitals`;
+                const bannerImg = document.getElementById('hospital-banner');
+                const bannerText = selectedHospital.replace(/\s/g, '+') + '+Banner';
+                bannerImg.src = `https://placehold.co/1200x400/8b60ed/ffffff?text=${bannerText}`;
+                bannerImg.alt = `${selectedHospital} Banner`;
+                document.getElementById('analytics-title').textContent = `Analytics at ${selectedHospital}`;
+            }
+
+            document.getElementById('logout-btn').addEventListener('click', function () {
+                localStorage.clear();
+                window.location.href = 'index.html';
+            });
+        });
+    </script>
+
 </body>
+
 </html>
