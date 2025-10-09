@@ -7,6 +7,7 @@
     <title>Appointment Form | Paradox Hospitals</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <style>
         :root {
             --primary-color: #201a4e;
@@ -185,6 +186,41 @@
             color: #16a34a;
         }
 
+        .success-actions {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .success-btn {
+            display: inline-block;
+            text-decoration: none;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .success-btn:hover {
+            background-color: #3a2d80;
+            transform: translateY(-2px);
+        }
+
+        .success-btn.secondary {
+            background-color: var(--secondary-color);
+            color: var(--text-dark);
+            border-color: var(--border-color);
+        }
+
+        .success-btn.secondary:hover {
+            background-color: #e2e8f0;
+        }
+
         @media (max-width: 600px) {
             .form-grid {
                 grid-template-columns: 1fr;
@@ -199,7 +235,6 @@
 </head>
 
 <body>
-
     <header class="header">
         <div class="logo">
             <a href="home.html"><img src="paradox-logo.png" alt="Paradox Logo"></a>
@@ -208,136 +243,149 @@
             <button id="logout-btn">Log Out</button>
         </div>
     </header>
-
     <main class="form-section">
         <div class="form-card">
             <div id="booking-form-content">
-                <div class="doctor-details">
-                    <img id="doctor-image" src="https://placehold.co/100x100/E0F2FE/1E293B?text=Doc"
-                        alt="Doctor's Photo">
+                <div class="doctor-details"><img id="doctor-image"
+                        src="https://placehold.co/100x100/E0F2FE/1E293B?text=Doc" alt="Doctor's Photo">
                     <div>
                         <h1 id="doctor-name">Doctor's Name</h1>
                         <p id="doctor-specialty">Specialty</p>
                     </div>
                 </div>
-
                 <form id="appointmentForm">
-                    <div class="form-group full-width">
-                        <label for="patient-name">Your Full Name</label>
-                        <input type="text" id="patient-name" required>
-                    </div>
+                    <div class="form-group full-width"><label for="patient-name">Your Full Name</label><input
+                            type="text" id="patient-name" required></div>
                     <div class="form-grid">
-                        <div class="form-group">
-                            <label for="dob">Date of Birth</label>
-                            <input type="date" id="dob" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="age">Age</label>
-                            <input type="text" id="age" readonly placeholder="Calculated automatically">
-                        </div>
-                        <div class="form-group">
-                            <label for="gender">Gender</label>
-                            <select id="gender" required>
+                        <div class="form-group"><label for="dob">Date of Birth</label><input type="date" id="dob"
+                                required></div>
+                        <div class="form-group"><label for="age">Age</label><input type="text" id="age" readonly
+                                placeholder="Calculated automatically"></div>
+                        <div class="form-group"><label for="gender">Gender</label><select id="gender" required>
                                 <option value="" disabled selected>Select Gender</option>
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
                                 <option value="other">Other</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="date">Preferred Date</label>
-                            <input type="date" id="date" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="time">Booking Timings</label>
-                            <select id="time" required>
-                                <option value="">Select Time</option>
-                            </select>
-                        </div>
-                    </div>
-                    <button type="submit" class="confirm-btn full-width">Confirm Appointment</button>
+                            </select></div>
+                        <div class="form-group"><label for="date">Preferred Date</label><input type="text" id="date"
+                                required placeholder="Select a date..."></div>
+                        <div class="form-group"><label for="time">Booking Timings</label><select id="time" required>
+                                <option value="">Select a date first</option>
+                            </select></div>
+                    </div><button type="submit" class="confirm-btn full-width">Confirm Appointment</button>
                 </form>
             </div>
             <div id="success-message">
                 <i class="fas fa-check-circle"></i>
                 <h2>Success!</h2>
                 <p id="token-info">Your appointment has been booked.</p>
+                <div class="success-actions">
+                    <a href="profile.html" class="success-btn">Check My Appointments</a>
+                    <a href="hospital.html" class="success-btn secondary">Back to Home</a>
+                </div>
             </div>
         </div>
     </main>
 
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const logoutBtn = document.getElementById('logout-btn');
-            logoutBtn.addEventListener('click', function () {
-                localStorage.removeItem('paradoxUserName');
-                window.location.href = 'signin.html';
-            });
-
+            logoutBtn.addEventListener('click', function () { localStorage.clear(); window.location.href = 'signin.html'; });
             const params = new URLSearchParams(window.location.search);
             const doctorName = params.get('doctor') || "No Doctor Selected";
             const doctorSpecialty = params.get('specialty') || "";
             const doctorImg = params.get('img') || "https://placehold.co/100x100/cccccc/ffffff?text=N/A";
-
             document.getElementById('doctor-name').textContent = doctorName;
             document.getElementById('doctor-specialty').textContent = doctorSpecialty;
             document.getElementById('doctor-image').src = doctorImg;
-
             const dobInput = document.getElementById('dob');
             const ageInput = document.getElementById('age');
-            dobInput.addEventListener('change', function () {
-                if (this.value) {
-                    const birthDate = new Date(this.value);
-                    const today = new Date();
-                    let age = today.getFullYear() - birthDate.getFullYear();
-                    const m = today.getMonth() - birthDate.getMonth();
-                    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) age--;
-                    ageInput.value = age;
-                }
-            });
-
             const dateInput = document.getElementById('date');
             const timeSelect = document.getElementById('time');
+            const todayISO = new Date().toISOString().split('T')[0];
+            dobInput.setAttribute('max', todayISO);
+            dobInput.addEventListener('change', function () { if (this.value) { const birthDate = new Date(this.value); const todayDate = new Date(); if (birthDate > todayDate) { this.value = ''; ageInput.value = ''; return; } let age = todayDate.getFullYear() - birthDate.getFullYear(); const m = todayDate.getMonth() - birthDate.getMonth(); if (m < 0 || (m === 0 && todayDate.getDate() < birthDate.getDate())) age--; ageInput.value = age; } });
 
             const unavailableDates = ["2025-10-10", "2025-10-12", "2025-10-15"];
-            const timeSlots = ["09:00 AM - 10:00 AM", "10:00 AM - 11:00 AM", "11:00 AM - 12:00 PM", "02:00 PM - 03:00 PM"];
+            const timeSlots = [
+                { display: "09:00 AM - 10:00 AM", startHour: 9 },
+                { display: "10:00 AM - 11:00 AM", startHour: 10 },
+                { display: "11:00 AM - 12:00 PM", startHour: 11 },
+                { display: "02:00 PM - 03:00 PM", startHour: 14 }
+            ];
 
-            dateInput.addEventListener('input', function () {
-                if (unavailableDates.includes(this.value)) {
-                    alert("This date is unavailable. Please select another date.");
-                    this.value = "";
-                    timeSelect.innerHTML = '<option value="">Select Time</option>';
-                    return;
+            flatpickr("#date", {
+                minDate: "today",
+                disable: unavailableDates,
+                dateFormat: "d-m-Y",
+                onChange: function (selectedDates, dateStr, instance) {
+                    const selectedDate = selectedDates[0];
+                    const today = new Date();
+
+                    today.setHours(0, 0, 0, 0);
+                    if (selectedDate) {
+                        selectedDate.setHours(0, 0, 0, 0);
+                    }
+
+                    const isToday = selectedDate && (selectedDate.getTime() === today.getTime());
+                    const currentHour = new Date().getHours();
+
+                    timeSelect.innerHTML = '';
+                    const availableSlots = timeSlots.filter(slot => {
+                        if (isToday && slot.startHour < currentHour) {
+                            return false;
+                        }
+                        return true;
+                    });
+
+                    if (availableSlots.length > 0) {
+                        timeSelect.innerHTML = '<option value="" disabled selected>Select Time</option>';
+                        availableSlots.forEach(slot => {
+                            const option = document.createElement('option');
+                            option.value = slot.display;
+                            option.textContent = slot.display;
+                            timeSelect.appendChild(option);
+                        });
+                    } else {
+                        timeSelect.innerHTML = '<option value="" disabled selected>No more slots available today</option>';
+                    }
                 }
-
-                timeSelect.innerHTML = '<option value="">Select Time</option>';
-                timeSlots.forEach(t => {
-                    const option = document.createElement('option');
-                    option.value = t;
-                    option.textContent = t;
-                    timeSelect.appendChild(option);
-                });
             });
-
-            if (!localStorage.getItem('appointmentToken')) {
-                localStorage.setItem('appointmentToken', '1');
-            }
 
             const form = document.getElementById('appointmentForm');
             form.addEventListener('submit', function (e) {
                 e.preventDefault();
 
-                const tokenNumber = localStorage.getItem('appointmentToken');
-                document.getElementById('token-info').textContent = `Your appointment has been booked. Token No: ${tokenNumber}`;
-                
-                localStorage.setItem('appointmentToken', parseInt(tokenNumber) + 1);
+                const selectedHospital = localStorage.getItem('selectedHospital') || 'Paradox General';
+                const tokenKey = `token_${selectedHospital.replace(/[^a-zA-Z0-9]/g, '')}_${doctorName.replace(/[^a-zA-Z0-9]/g, '')}`;
+                const lastAssignedToken = parseInt(localStorage.getItem(tokenKey) || '1');
+                const tokenNumber = lastAssignedToken + 1;
 
+                const newAppointment = {
+                    hospitalName: selectedHospital,
+                    doctor: doctorName,
+                    specialty: doctorSpecialty,
+                    img: doctorImg,
+                    patientName: document.getElementById('patient-name').value,
+                    date: dateInput.value,
+                    time: timeSelect.value,
+                    token: tokenNumber
+                };
+
+                const existingAppointments = JSON.parse(localStorage.getItem('appointments')) || [];
+                existingAppointments.push(newAppointment);
+                localStorage.setItem('appointments', JSON.stringify(existingAppointments));
+
+                localStorage.setItem(tokenKey, tokenNumber);
+
+                document.getElementById('token-info').textContent = `Your appointment at ${selectedHospital} is booked. Your Token is #${tokenNumber}`;
                 document.getElementById('booking-form-content').style.display = 'none';
                 document.getElementById('success-message').style.display = 'block';
             });
         });
     </script>
-
 </body>
 
 </html>
