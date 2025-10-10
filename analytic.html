@@ -43,7 +43,7 @@
             <a href="hospital.html">Home</a>
             <a href="book.html">Book Appointment</a>
             <a href="blueprint.html">Hospital Blue Print</a>
-            <a href="video.html">Book Video Consultancy</a>
+            <a href="select-doctor-video.html">Book Video Consultancy</a>
             <a href="food.html">Order Food</a>
             <a href="profile.html" class="active">My Profile</a>
         </div>
@@ -55,10 +55,10 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('logout-btn').addEventListener('click', function () { localStorage.clear(); window.location.href = 'signin.html'; });
+            document.getElementById('logout-btn').addEventListener('click', function () { sessionStorage.clear(); window.location.href = 'signin.html'; });
 
             const statusCard = document.getElementById('status-card');
-            const appointmentData = JSON.parse(localStorage.getItem('selectedAppointment'));
+            const appointmentData = JSON.parse(sessionStorage.getItem('selectedAppointment'));
 
             if (!appointmentData) {
                 statusCard.innerHTML = `<p style="text-align:center;">No appointment selected. <a href="profile.html">Go back to your profile</a> to select one.</p>`;
@@ -79,8 +79,6 @@
             if (appointmentDate === todayFormatted) {
                 const currentServingToken = 2; 
                 const peopleAhead = Math.max(0, userToken - currentServingToken - 1);
-
-                // UPDATED: Set the estimated wait time to a fixed 10 minutes.
                 estimatedWaitMinutes = 10;
 
                 analyticsHTML = `
@@ -124,7 +122,6 @@
             
             statusCard.innerHTML = fullCardHTML;
 
-            // Countdown timer logic will now use the fixed 10-minute value
             const countdownElement = document.getElementById('countdown-timer');
             if (countdownElement) {
                 let durationInSeconds = estimatedWaitMinutes * 60;
