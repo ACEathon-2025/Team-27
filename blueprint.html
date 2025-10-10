@@ -241,7 +241,7 @@
             <a href="hospital.html">Home</a>
             <a href="book.html">Book Appointment</a>
             <a href="blueprint.html" class="active">Hospital Blue Print</a>
-            <a href="video.html">Book Video Consultancy</a>
+            <a href="select-doctor-video.html">Book Video Consultancy</a>
             <a href="food.html">Order Food</a>
             <a href="profile.html">My Profile</a>
         </div>
@@ -326,7 +326,7 @@
             const logoutBtn = document.getElementById('logout-btn');
 
             logoutBtn.addEventListener('click', () => {
-                localStorage.removeItem('paradoxUserName');
+                localStorage.clear();
                 window.location.href = 'signin.html';
             });
 
