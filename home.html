@@ -6,325 +6,190 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Paradise Hospitals</title>
   <style>
+    /* General Styles */
     * {
       margin: 0;
       box-sizing: border-box;
       font-family: 'Segoe UI', sans-serif;
     }
-
-    body {
-      background-color: #f9fafc;
-      color: #1e293b;
-      line-height: 1.6;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .logo img {
-      height: 140px;
-      width: 250px;
-    }
-
-    .head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: linear-gradient(to left, #8b60ed, #c3adf8);
-      padding: 20px 60px;
-    }
-
-    .sign {
-      display: flex;
-      gap: 15px;
-    }
-
-    .in,
-    .up {
-      background-color: #201a4e;
-      padding: 10px 20px;
-      border-radius: 6px;
+    body { background-color: #f9fafc; color: #1e293b; line-height: 1.6; }
+    a { text-decoration: none; color: inherit; }
+    .section-title {
+      font-size: 38px;
+      color: #201a4e;
+      margin-bottom: 50px;
       font-weight: bold;
-      transition: 0.3s ease;
-    }
-
-    .in a,
-    .up a {
-      color: #fff;
-    }
-
-    .in:hover,
-    .up:hover {
-      background-color: #3a2d80;
-      transform: scale(1.05);
-    }
-
-    .in.transparent {
-      background-color: transparent;
-      border: 2px solid #201a4e;
-    }
-
-    .in.transparent a {
-      color: #201a4e;
-    }
-
-    .in.transparent:hover {
-      background-color: white;
-    }
-
-    main {
       text-align: center;
-      margin: 100px 20px 30px;
     }
 
-    main h1 {
-      font-size: 50px;
-      color: #201a4e;
-    }
+    /* Header */
+    .logo img { height: 140px; width: 250px; }
+    .head { display: flex; justify-content: space-between; align-items: center; background: linear-gradient(to left, #8b60ed, #c3adf8); padding: 20px 60px; }
+    .sign { display: flex; gap: 15px; }
+    .in, .up { background-color: #201a4e; padding: 10px 20px; border-radius: 6px; font-weight: bold; transition: 0.3s ease; }
+    .in a, .up a { color: #fff; }
+    .in:hover, .up:hover { background-color: #3a2d80; transform: scale(1.05); }
+    .in.transparent { background-color: transparent; border: 2px solid #201a4e; }
+    .in.transparent a { color: #201a4e; }
+    .in.transparent:hover { background-color: white; }
+    
+    /* Main Welcome Section */
+    main { text-align: center; margin: 100px 20px 30px; }
+    main h1 { font-size: 50px; color: #201a4e; }
+    main h1 span { background: linear-gradient(to right, #8b60ed, #d944c5); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: bold; }
+    .text { margin-top: 20px; font-size: 24px; font-weight: bold; color: #8b60ed; }
+    
+    /* Search & SOS */
+    .search-section { text-align: center; margin: 30px 0; }
+    #hospitalSearch { width: 100%; max-width: 600px; padding: 15px 20px; font-size: 18px; border-radius: 30px; border: 2px solid #e2e8f0; transition: all 0.3s ease; }
+    #hospitalSearch:focus { outline: none; border-color: #8b60ed; box-shadow: 0 0 15px rgba(139, 96, 237, 0.2); }
+    .call { background: linear-gradient(to left, #0f0f0f, #f72905); height: 90px; width: 90px; border-radius: 50%; position: fixed; right: 20px; bottom: 20px; text-align: center; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); transition: 0.3s ease; z-index: 999; }
+    .call:hover { transform: scale(1.1); }
+    .call p { margin-top: 30px; font-weight: bold; font-size: 22px; color: white; }
+    
+    /* Hospital Posters */
+    .poster { margin: 65px auto; display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; }
+    .poster div { background: #fff; height: 300px; width: 280px; border-radius: 12px; display: flex; flex-direction: column; align-items: center; overflow: hidden; box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .poster div:hover { transform: translateY(-8px); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12); }
+    .poster div img { height: 180px; width: 100%; object-fit: cover; }
+    .poster div span { color: #201a4e; font-size: 18px; font-weight: bold; margin: 15px 0; text-align: center; padding: 0 10px; }
+    .view-hospital-btn { display: inline-block; background-color: #201a4e; color: white; padding: 8px 16px; border-radius: 6px; margin-bottom: 15px; font-weight: 600; font-size: 14px; transition: all 0.3s ease; text-align: center; }
+    .view-hospital-btn:hover { background-color: #3a2d80; transform: scale(1.05); color: white; }
 
-    main h1 span {
+    /* === REFINED "WHY CHOOSE US" SECTION === */
+    .why-us-section {
+      padding: 80px 20px;
+      background-color: #f6f4ff; /* New subtle background */
+    }
+    .why-us-container {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .why-us-item {
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+      width: 280px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .why-us-item:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 25px rgba(139, 96, 237, 0.2);
+    }
+    .why-us-item .icon {
+      font-size: 48px;
       background: linear-gradient(to right, #8b60ed, #d944c5);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      font-weight: bold;
+      margin-bottom: 15px;
     }
+    .why-us-item h3 { font-size: 22px; color: #201a4e; margin-bottom: 10px; }
+    .why-us-item p { font-size: 16px; color: #475569; }
 
-    .text {
-      margin-top: 20px;
-      font-size: 24px;
-      font-weight: bold;
-      color: #8b60ed;
+    /* === CIRCULAR STATS SECTION === */
+    .stats-section {
+      padding: 80px 20px;
+      background: linear-gradient(to right, #63f3e4, #8b60ed);
     }
-
-    .search-section {
-      text-align: center;
-      margin: 30px 0;
-    }
-
-    #hospitalSearch {
-      width: 100%;
-      max-width: 600px;
-      padding: 15px 20px;
-      font-size: 18px;
-      border-radius: 30px;
-      border: 2px solid #e2e8f0;
-      transition: all 0.3s ease;
-    }
-
-    #hospitalSearch:focus {
-      outline: none;
-      border-color: #8b60ed;
-      box-shadow: 0 0 15px rgba(139, 96, 237, 0.2);
-    }
-
-    .call {
-      background: linear-gradient(to left, #0f0f0f, #f72905);
-      height: 90px;
-      width: 90px;
-      border-radius: 50%;
-      position: fixed;
-      right: 20px;
-      bottom: 20px;
-      text-align: center;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-      transition: 0.3s ease;
-    }
-
-    .call:hover {
-      transform: scale(1.1);
-    }
-
-    .call p {
-      margin-top: 30px;
-      font-weight: bold;
-      font-size: 22px;
-      color: white;
-    }
-
-    .poster {
-      margin: 65px auto;
+    .stats-container {
       display: flex;
+      justify-content: space-around;
+      align-items: center;
       flex-wrap: wrap;
       gap: 30px;
-      justify-content: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+      color: #fff;
     }
-
-    .poster div {
-      background: #fff;
-      height: 300px;
-      width: 280px;
-      border-radius: 12px;
+    .stats-item {
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      width: 220px;
+      height: 220px;
       display: flex;
       flex-direction: column;
+      justify-content: center;
       align-items: center;
-      overflow: hidden;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, background-color 0.3s ease;
     }
-
-    .poster div:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    .stats-item:hover {
+      transform: scale(1.08);
+      background: rgba(255, 255, 255, 0.25);
     }
+    .stats-item .icon { font-size: 40px; margin-bottom: 5px; }
+    .stats-item .number { font-size: 36px; font-weight: bold; }
+    .stats-item .label { font-size: 18px; font-weight: 500; opacity: 0.9; }
 
-    .poster div img {
-      height: 180px;
-      width: 100%;
-      object-fit: cover;
+    /* === NEW ANALYTICS CHART SECTION === */
+    .charts-section {
+      padding: 80px 20px;
     }
-
-    .poster div span {
-      color: #201a4e;
-      font-size: 18px;
-      font-weight: bold;
-      margin: 15px 0;
-      text-align: center;
-    }
-
-    .why {
-      background: linear-gradient(to right, #63f3e4, #8b60ed);
-      margin: 50px auto;
-      border-radius: 8px;
-      padding: 50px 30px;
-      color: #fff;
-      text-align: center;
+    .chart-container {
       max-width: 900px;
-    }
-
-    .why h2 {
-      font-size: 36px;
-      margin-bottom: 15px;
-    }
-
-    .why p {
-      font-size: 18px;
-    }
-
-    .foot {
+      margin: 0 auto;
       display: flex;
-      flex-wrap: wrap;
-      background-color: #1e293b;
-      justify-content: space-around;
-      padding: 40px 20px;
-      border-bottom: 1px solid #c4c9d0;
-      color: white;
+      flex-direction: column;
       gap: 30px;
     }
-
-    .details h3,
-    .contact h3,
-    .link h3 {
-      font-size: 22px;
-      margin-bottom: 15px;
-    }
-
-    .foot p,
-    .foot a {
-      font-size: 16px;
-      margin-top: 8px;
-      color: #e2e8f0;
-    }
-
-    .foot a:hover {
-      color: #63f3e4;
-    }
-
-    .last {
-      background-color: #1e293b;
-      text-align: center;
-      padding: 20px;
-      color: #e2e8f0;
-      font-size: 14px;
-    }
-
-    .last a {
-      color: #63f3e4;
-    }
-
-    .view-hospital-btn {
-      display: inline-block;
-      background-color: #201a4e;
-      color: white;
-      padding: 8px 16px;
-      border-radius: 6px;
-      margin-bottom: 15px;
-      font-weight: 600;
-      font-size: 14px;
-      transition: all 0.3s ease;
-      text-align: center;
-    }
-
-    .view-hospital-btn:hover {
-      background-color: #3a2d80;
-      transform: scale(1.05);
-      color: white;
-    }
-
-    .overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.6);
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
-
-    .popup {
-      background: #fff;
-      padding: 40px 30px;
-      border-radius: 12px;
-      text-align: center;
-      width: 90%;
-      max-width: 400px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-      animation: popupFade 0.3s ease;
-    }
-
-    .popup h3 {
-      color: #201a4e;
-      font-size: 22px;
-      margin-bottom: 20px;
-    }
-
-    .popup .btn-group {
+    .chart-item {
       display: flex;
-      justify-content: center;
-      gap: 15px;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .chart-item .chart-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 18px;
+      font-weight: 600;
+      color: #201a4e;
+    }
+    .chart-bar-background {
+      width: 100%;
+      height: 25px;
+      background-color: #e2e8f0;
+      border-radius: 15px;
+      overflow: hidden;
+    }
+    .chart-bar-fill {
+      height: 100%;
+      background: linear-gradient(to right, #8b60ed, #d944c5);
+      border-radius: 15px;
+      transform: scaleX(0);
+      transform-origin: left;
+      animation: fillBar 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    }
+    .chart-bar-fill.hospitals { width: 85%; }
+    .chart-bar-fill.doctors { width: 95%; }
+    .chart-bar-fill.patients { width: 90%; }
+    @keyframes fillBar {
+      to { transform: scaleX(1); }
     }
 
-    .popup button {
-      background-color: #201a4e;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 6px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s ease;
-    }
-
-    .popup button:hover {
-      background-color: #3a2d80;
-      transform: scale(1.05);
-    }
-
-    @keyframes popupFade {
-      from {
-        transform: scale(0.8);
-        opacity: 0;
-      }
-
-      to {
-        transform: scale(1);
-        opacity: 1;
-      }
-    }
+    /* Footer */
+    .foot { display: flex; flex-wrap: wrap; background-color: #1e293b; justify-content: space-around; padding: 40px 20px; border-bottom: 1px solid #c4c9d0; color: white; gap: 30px; }
+    .details h3, .contact h3, .link h3 { font-size: 22px; margin-bottom: 15px; }
+    .foot p, .foot a { font-size: 16px; margin-top: 8px; color: #e2e8f0; }
+    .foot a:hover { color: #63f3e4; }
+    .last { background-color: #1e293b; text-align: center; padding: 20px; color: #e2e8f0; font-size: 14px; }
+    .last a { color: #63f3e4; }
+    
+    /* Pop-up */
+    .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); justify-content: center; align-items: center; z-index: 1000; }
+    .popup { background: #fff; padding: 40px 30px; border-radius: 12px; text-align: center; width: 90%; max-width: 400px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); animation: popupFade 0.3s ease; }
+    .popup h3 { color: #201a4e; font-size: 22px; margin-bottom: 20px; }
+    .popup .btn-group { display: flex; justify-content: center; gap: 15px; }
+    .popup button { background-color: #201a4e; color: white; border: none; padding: 10px 20px; border-radius: 6px; font-weight: bold; cursor: pointer; transition: 0.3s ease; }
+    .popup button:hover { background-color: #3a2d80; transform: scale(1.05); }
+    @keyframes popupFade { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
   </style>
 </head>
 
@@ -357,33 +222,92 @@
 
   <nav>
     <div class="poster" id="hospitalList">
-      <div data-hospital-name="Manipal Hospital">
-        <img
-          src="https://images.financialexpressdigital.com/2022/08/Manipal-Hospitals-expands-footprint-with-new-facility-in-Pune.jpg"
-          alt="">
-        <span>Manipal Hospital</span>
-        <a href="hospital.html" class="view-hospital-btn">View Hospital</a>
-      </div>
-      <div data-hospital-name="Apollo Hospital">
-        <img src="https://placehold.co/280x180/E0F2FE/1E293B?text=Apollo+Hospital" alt="">
-        <span>Apollo Hospital</span>
-        <a href="hospital.html" class="view-hospital-btn">View Hospital</a>
-      </div>
-      <div data-hospital-name="Fortis Healthcare">
-        <img src="https://placehold.co/280x180/D1FAE5/1E293B?text=Fortis+Healthcare" alt="">
-        <span>Fortis Healthcare</span>
-        <a href="hospital.html" class="view-hospital-btn">View Hospital</a>
-      </div>
+      <div data-hospital-name="Manipal Hospital"><img src="https://images.financialexpressdigital.com/2022/08/Manipal-Hospitals-expands-footprint-with-new-facility-in-Pune.jpg" alt="Manipal Hospital"><span>Manipal Hospital</span><a href="hospital.html" class="view-hospital-btn">View Hospital</a></div>
+      <div data-hospital-name="Apollo Hospital"><img src="https://www.manchanda.net/images/AGNH01.jpg" alt="Apollo Hospital"><span>Apollo Hospital</span><a href="hospital.html" class="view-hospital-btn">View Hospital</a></div>
+      <div data-hospital-name="Global Health"><img src="https://images.news18.com/ibnlive/uploads/2025/07/1752056906_hospital-1-2025-07-2f61b99dad6b5cc93ac8d8d9acc895d8.jpg" alt="Global Health"><span>Global Health</span><a href="hospital.html" class="view-hospital-btn">View Hospital</a></div>
+      <div data-hospital-name="City Central Hospital"><img src="https://images.unsplash.com/photo-1654762930571-dcf2ebc11542?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8aW5kaWFuJTIwaG9zcGl0YWx8ZW58MHx8MHx8fDA%3D" alt="City Central Hospital"><span>City Central Hospital</span><a href="hospital.html" class="view-hospital-btn">View Hospital</a></div>
+      <div data-hospital-name="Sigma Hospital"><img src="https://c8.alamy.com/comp/A5JGJG/sigma-hospital-building-hyderabad-andhra-pradesh-india-A5JGJG.jpg" alt="Sigma Hospital"><span>Sigma Hospital</span><a href="hospital.html" class="view-hospital-btn">View Hospital</a></div>
+      <div data-hospital-name="Star Hospital"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSQcWbx7QHiDn1DVycnNBD488DZFPERa4f_g&s" alt="Star Hospital"><span>Star Hospital</span><a href="hospital.html" class="view-hospital-btn">View Hospital</a></div>
+      <div data-hospital-name="Amrita Hospital"><img src="https://images.livemint.com/img/2022/08/25/1600x900/PTI08-21-2022-000013B-0_1661400350725_1661400350725_1661404360288_1661404360288.jpg" alt="Amrita Hospital"><span>Amrita Hospital</span><a href="hospital.html" class="view-hospital-btn">View Hospital</a></div>
+      <div data-hospital-name="Max Healthcare"><img src="https://housing.com/news/wp-content/uploads/2023/10/hospital-chains-india-f-compressed.jpg" alt="Max Healthcare"><span>Max Healthcare</span><a href="hospital.html" class="view-hospital-btn">View Hospital</a></div>
+      <div data-hospital-name="Pristine Medical"><img src="https://www.medicalindiatourism.com/wp-content/uploads/2021/11/138-585x390.jpg" alt="Pristine Medical"><span>Pristine Medical</span><a href="hospital.html" class="view-hospital-btn">View Hospital</a></div>
+      <div data-hospital-name="Future Healthcare"><img src="https://www.re-thinkingthefuture.com/wp-content/uploads/2021/05/A4046-Evolution-of-Healthcare-Architecture-in-India-IMAGE-1.jpg?w=999" alt="Future Healthcare"><span>Future Healthcare</span><a href="hospital.html" class="view-hospital-btn">View Hospital</a></div>
+      <div data-hospital-name="KIMS Hospital"><img src="https://clinicspotsindia.com/wp-content/uploads/2024/11/KIMS-Hospital-Hyderabad-1024x538.webp" alt="KIMS Hospital"><span>KIMS Hospital</span><a href="hospital.html" class="view-hospital-btn">View Hospital</a></div>
+      <div data-hospital-name="Acharya Shree Hospital"><img src="https://medicaldialogues.in/h-upload/2023/10/21/223445-acharya-shree-bhikshu.jpg" alt="Acharya Shree Hospital"><span>Acharya Shree Hospital</span><a href="hospital.html" class="view-hospital-btn">View Hospital</a></div>
+      <div data-hospital-name="Sunshine Hospital"><img src="https://i.ytimg.com/vi/QGr_5yA3rIk/maxresdefault.jpg" alt="Sunshine Hospital"><span>Sunshine Hospital</span><a href="hospital.html" class="view-hospital-btn">View Hospital</a></div>
+      <div data-hospital-name="Wellness Center"><img src="https://5.imimg.com/data5/SELLER/Default/2021/11/UX/YH/CE/50971950/hospital-construction-works-500x500.jpg" alt="Wellness Center"><span>Wellness Center</span><a href="hospital.html" class="view-hospital-btn">View Hospital</a></div>
+      <div data-hospital-name="Fortis Noida"><img src="https://clinicspotsindia.com/wp-content/uploads/2024/11/Fortis-Hospital-Greater-Noida-1024x538.webp" alt="Fortis Noida"><span>Fortis Noida</span><a href="hospital.html" class="view-hospital-btn">View Hospital</a></div>
+      <div data-hospital-name="Medanta Medicity"><img src="https://www.impactguru.com/info/wp-content/uploads/2023/09/Medanta-The-Medicity.jpg" alt="Medanta Medicity"><span>Medanta Medicity</span><a href="hospital.html" class="view-hospital-btn">View Hospital</a></div>
+      <div data-hospital-name="Aakash Healthcare"><img src="https://clinicsoncall.com/wp-content/uploads/2024/12/aakash-hospital-main-image-1.png" alt="Aakash Healthcare"><span>Aakash Healthcare</span><a href="hospital.html" class="view-hospital-btn">View Hospital</a></div>
+      <div data-hospital-name="Metro Health"><img src="https://images.unsplash.com/photo-1642381072437-ba50ad0a84b7?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGluZGlhbiUyMGhvc3BpdGFsfGVufDB8fDB8fHww" alt="Metro Health"><span>Metro Health</span><a href="hospital.html" class="view-hospital-btn">View Hospital</a></div>
+      <div data-hospital-name="Yashoda Hospitals"><img src="https://yapita-production.s3.ap-south-1.amazonaws.com/uploads/facility/seo_image/bd5e718b-c525-4b17-80c2-0af5333ef6cc/file.webp" alt="Yashoda Hospitals"><span>Yashoda Hospitals</span><a href="hospital.html" class="view-hospital-btn">View Hospital</a></div>
+      <div data-hospital-name="BLK-Max Hospital"><img src="https://static.medigence.com/uploads/hospital/images/1743511079_b3c1ac3a91aff0c4eadf.jpg" alt="BLK-Max Hospital"><span>BLK-Max Hospital</span><a href="hospital.html" class="view-hospital-btn">View Hospital</a></div>
+      <div data-hospital-name="Baramati Medical College"><img src="https://inidesignstudio.com/wp-content/uploads/2020/11/Medical-College-Hospital-Campus-at-Baramati-Thumb.jpg" alt="Baramati Medical College"><span>Baramati Medical College</span><a href="hospital.html" class="view-hospital-btn">View Hospital</a></div>
+      <div data-hospital-name="AIIMS Hospital"><img src="https://www.reuters.com/resizer/v2/P72VW4ZLONOHBGS62T3AYG2GXI.jpg?auth=c54a1349ffe5e0d78596754a4fe187d4c1628632b4b427b65ed4054c4fb89189&width=4439&quality=80" alt="AIIMS Hospital"><span>AIIMS Hospital</span><a href="hospital.html" class="view-hospital-btn">View Hospital</a></div>
+      <div data-hospital-name="Indiana Hospital"><img src="https://indianahassan.com/gallery-images/1_0b3c2ffef851c596.jpg" alt="Indiana Hospital"><span>Indiana Hospital</span><a href="hospital.html" class="view-hospital-btn">View Hospital</a></div>
+      <div data-hospital-name="Chennai Govt Hospital"><img src="https://images.pond5.com/exterior-building-government-hospital-chennai-footage-078696071_iconl.jpeg" alt="Chennai Govt Hospital"><span>Chennai Govt Hospital</span><a href="hospital.html" class="view-hospital-btn">View Hospital</a></div>
+      <div data-hospital-name="Care Hospitals"><img src="https://getwellgo.com/uploads/Care%20hospitals.jpg" alt="Care Hospitals"><span>Care Hospitals</span><a href="hospital.html" class="view-hospital-btn">View Hospital</a></div>
     </div>
   </nav>
 
-  <nav>
-    <div class="why">
-      <h2>Why Choose Us?</h2>
-      <p>We provide world-class facilities, expert doctors, and compassionate care to ensure the well-being of our
-        patients.</p>
+  <section class="why-us-section">
+    <h2 class="section-title">Why Choose Paradise Hospitals?</h2>
+    <div class="why-us-container">
+      <div class="why-us-item">
+        <div class="icon">🩺</div>
+        <h3>Expert Doctors</h3>
+        <p>Access highly skilled medical professionals across all specializations.</p>
+      </div>
+      <div class="why-us-item">
+        <div class="icon">🔬</div>
+        <h3>Advanced Technology</h3>
+        <p>We use cutting-edge technology for accurate diagnosis and treatments.</p>
+      </div>
+      <div class="why-us-item">
+        <div class="icon">❤️</div>
+        <h3>Patient-Centric Care</h3>
+        <p>We prioritize your comfort with compassionate and personalized care.</p>
+      </div>
+       <div class="why-us-item">
+        <div class="icon">🚑</div>
+        <h3>24/7 Emergency</h3>
+        <p>Our emergency services are available around the clock for any situation.</p>
+      </div>
     </div>
-  </nav>
+  </section>
+
+  <section class="charts-section">
+    <h2 class="section-title">Our Growth & Impact</h2>
+    <div class="chart-container">
+      <div class="chart-item">
+        <div class="chart-label">
+          <span>Hospitals Network</span>
+          <span>50,000+</span>
+        </div>
+        <div class="chart-bar-background">
+          <div class="chart-bar-fill hospitals"></div>
+        </div>
+      </div>
+      <div class="chart-item">
+        <div class="chart-label">
+          <span>Associated Doctors</span>
+          <span>20,000,000+</span>
+        </div>
+        <div class="chart-bar-background">
+          <div class="chart-bar-fill doctors"></div>
+        </div>
+      </div>
+      <div class="chart-item">
+        <div class="chart-label">
+          <span>Patients Served Annually</span>
+          <span>10,000,000,000+</span>
+        </div>
+        <div class="chart-bar-background">
+          <div class="chart-bar-fill patients"></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <footer>
     <div class="foot">
@@ -428,10 +352,8 @@
       const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
       const username = localStorage.getItem('username');
 
-      if (isLoggedIn) {
-        if (username) {
-          welcomeMessage.innerHTML = `Welcome, <span>${username}</span>`;
-        }
+      if (isLoggedIn && username) {
+        welcomeMessage.innerHTML = `Welcome, <span>${username}</span>`;
         authContainer.innerHTML = '<div class="in"><a href="#" id="logoutBtn">Log Out</a></div>';
         document.getElementById('logoutBtn').addEventListener('click', (e) => {
           e.preventDefault();
@@ -445,13 +367,16 @@
             const hospitalCard = link.closest('div[data-hospital-name]');
             if (hospitalCard) {
               const hospitalName = hospitalCard.dataset.hospitalName;
+              const hospitalImage = hospitalCard.querySelector('img').src;
+              
               localStorage.setItem('selectedHospital', hospitalName);
-              console.log(`Selected hospital set to: ${hospitalName}`);
+              localStorage.setItem('selectedHospitalImage', hospitalImage);
             }
           });
         });
 
       } else {
+        welcomeMessage.innerHTML = `Welcome to <span>Paradise Hospitals</span>`;
         authContainer.innerHTML = `
           <div class="in transparent"><a href="Signin.html">Sign In</a></div>
           <div class="up"><a href="Signup.html">Sign Up</a></div>
@@ -483,5 +408,4 @@
     });
   </script>
 </body>
-
 </html>
