@@ -19,242 +19,44 @@
             --font-family: 'Poppins', 'Segoe UI', sans-serif;
             --shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: var(--font-family);
-        }
-
-        body {
-            background-color: #f9fafc;
-            color: var(--text-dark);
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: linear-gradient(to left, #8b60ed, #c3adf8);
-            padding: 20px 60px;
-        }
-
-        .logo img {
-            height: 140px;
-            width: 250px;
-        }
-
-        #logout-btn {
-            background-color: var(--primary-color);
-            padding: 10px 20px;
-            border-radius: 6px;
-            font-weight: bold;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            transition: 0.3s ease;
-        }
-
-        #logout-btn:hover {
-            background-color: #3a2d80;
-            transform: scale(1.05);
-        }
-
-        .sub-nav {
-            background-color: var(--background-light);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            padding: 15px 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            transition: box-shadow 0.3s ease, background-color 0.3s ease;
-        }
-
-
-        .sub-nav .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 30px;
-        }
-
-        .sub-nav a {
-            color: var(--text-dark);
-            font-weight: 600;
-            padding: 8px 12px;
-            border-radius: 6px;
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
-
-        .sub-nav a:hover,
-        .sub-nav a.active {
-            background-color: var(--primary-color);
-            color: white;
-        }
-
-        .search-doctors-section {
-            padding: 50px 0;
-        }
-
-        .search-doctors-section .container {
-            text-align: center;
-        }
-
-        .section-title {
-            font-size: 36px;
-            margin-bottom: 40px;
-            color: var(--primary-color);
-        }
-
-        #doctorSearch {
-            width: 100%;
-            max-width: 600px;
-            padding: 15px 20px;
-            font-size: 18px;
-            border-radius: 30px;
-            border: 2px solid var(--border-color);
-            transition: all 0.3s ease;
-            margin-bottom: 30px;
-        }
-
-        #doctorSearch:focus {
-            outline: none;
-            border-color: var(--primary-light);
-            box-shadow: 0 0 15px rgba(139, 96, 237, 0.2);
-        }
-
-        .filter-scroll-container {
-            overflow-x: auto;
-            padding-bottom: 15px;
-            margin-bottom: 50px;
-        }
-
-        .filter-scroll-container::-webkit-scrollbar {
-            height: 8px;
-        }
-
-        .filter-scroll-container::-webkit-scrollbar-track {
-            background: var(--secondary-color);
-            border-radius: 10px;
-        }
-
-        .filter-scroll-container::-webkit-scrollbar-thumb {
-            background-color: var(--primary-light);
-            border-radius: 10px;
-        }
-
-        .filter-buttons {
-            display: flex;
-            justify-content: flex-start;
-            gap: 15px;
-            flex-wrap: nowrap;
-            width: max-content;
-        }
-
-        .filter-btn {
-            background-color: var(--secondary-color);
-            border: 2px solid var(--border-color);
-            color: var(--text-dark);
-            padding: 10px 20px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-        }
-
-        .filter-btn:hover {
-            background-color: var(--primary-light);
-            color: white;
-            border-color: var(--primary-light);
-        }
-
-        .filter-btn.active {
-            background-color: var(--primary-color);
-            color: white;
-            border-color: var(--primary-color);
-        }
-
-        .doctor-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-
-        .doctor-card {
-            background: var(--background-light);
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            text-align: center;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .doctor-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-        }
-
-        .doctor-card img {
-            width: 100%;
-            height: 280px;
-            object-fit: cover;
-        }
-
-        .doctor-info {
-            padding: 20px;
-        }
-
-        .doctor-info h3 {
-            font-size: 20px;
-            color: var(--primary-color);
-        }
-
-        .doctor-info p {
-            color: var(--text-light);
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-
-        .book-btn {
-            display: inline-block;
-            background-color: var(--primary-color);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 6px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .book-btn:hover {
-            background-color: #3a2d80;
-            transform: scale(1.05);
-        }
-
-        .footer {
-            background-color: var(--text-dark);
-            text-align: center;
-            padding: 20px;
-            color: #e2e8f0;
-            font-size: 14px;
-            margin-top: 60px;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: var(--font-family); }
+        body { background-color: #f9fafc; color: var(--text-dark); line-height: 1.6; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .header { display: flex; justify-content: space-between; align-items: center; background: linear-gradient(to left, #8b60ed, #c3adf8); padding: 20px 60px; }
+        .logo img { height: 140px; width: 250px; }
+        #logout-btn { background-color: var(--primary-color); padding: 10px 20px; border-radius: 6px; font-weight: bold; color: #fff; border: none; cursor: pointer; transition: 0.3s ease; }
+        #logout-btn:hover { background-color: #3a2d80; transform: scale(1.05); }
+        .sub-nav { background-color: var(--background-light); box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); padding: 15px 0; position: sticky; top: 0; z-index: 1000; transition: box-shadow 0.3s ease, background-color 0.3s ease; }
+        .sub-nav .container { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 30px; }
+        .sub-nav a { color: var(--text-dark); font-weight: 600; padding: 8px 12px; border-radius: 6px; transition: all 0.3s ease; text-decoration: none; }
+        .sub-nav a:hover, .sub-nav a.active { background-color: var(--primary-color); color: white; }
+        .search-doctors-section { padding: 50px 0; }
+        .search-doctors-section .container { text-align: center; }
+        .section-title { font-size: 36px; margin-bottom: 40px; color: var(--primary-color); }
+        #doctorSearch { width: 100%; max-width: 600px; padding: 15px 20px; font-size: 18px; border-radius: 30px; border: 2px solid var(--border-color); transition: all 0.3s ease; margin-bottom: 30px; }
+        #doctorSearch:focus { outline: none; border-color: var(--primary-light); box-shadow: 0 0 15px rgba(139, 96, 237, 0.2); }
+        .filter-scroll-container { overflow-x: auto; padding-bottom: 15px; margin-bottom: 50px; }
+        .filter-scroll-container::-webkit-scrollbar { height: 8px; }
+        .filter-scroll-container::-webkit-scrollbar-track { background: var(--secondary-color); border-radius: 10px; }
+        .filter-scroll-container::-webkit-scrollbar-thumb { background-color: var(--primary-light); border-radius: 10px; }
+        .filter-buttons { display: flex; justify-content: flex-start; gap: 15px; flex-wrap: nowrap; width: max-content; }
+        .filter-btn { background-color: var(--secondary-color); border: 2px solid var(--border-color); color: var(--text-dark); padding: 10px 20px; border-radius: 20px; cursor: pointer; font-weight: 600; transition: all 0.3s ease; white-space: nowrap; }
+        .filter-btn:hover { background-color: var(--primary-light); color: white; border-color: var(--primary-light); }
+        .filter-btn.active { background-color: var(--primary-color); color: white; border-color: var(--primary-color); }
+        .doctor-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; }
+        .doctor-card { flex: 0 1 280px; background: var(--background-light); border-radius: 12px; box-shadow: var(--shadow); text-align: center; overflow: hidden; transition: all 0.3s ease; }
+        .doctor-card:hover { transform: translateY(-8px); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); }
+        .doctor-card img { width: 100%; height: 280px; object-fit: cover; }
+        .doctor-info { padding: 20px; }
+        .doctor-info h3 { font-size: 20px; color: var(--primary-color); }
+        .doctor-info p { color: var(--text-light); font-weight: 600; margin-bottom: 15px; }
+        .book-btn { display: inline-block; background-color: var(--primary-color); color: white; padding: 10px 20px; border-radius: 6px; font-weight: 600; text-decoration: none; transition: all 0.3s ease; }
+        .book-btn:hover { background-color: #3a2d80; transform: scale(1.05); }
+        .footer { background-color: var(--text-dark); text-align: center; padding: 20px; color: #e2e8f0; font-size: 14px; margin-top: 60px; }
     </style>
 </head>
 
 <body>
-
     <header class="header">
         <div class="logo">
             <a href="home.html"><img src="paradox-logo.png" alt="Paradox Logo"></a>
@@ -270,7 +72,7 @@
             <a href="hospital.html">Home</a>
             <a href="book.html" class="active">Book Appointment</a>
             <a href="blueprint.html">Hospital Blue Print</a>
-            <a href="video.html">Book Video Consultancy</a>
+            <a href="select-doctor-video.html">Book Video Consultancy</a>
             <a href="food.html">Order Food</a>
             <a href="profile.html">My Profile</a>
         </div>
@@ -280,7 +82,6 @@
         <div class="container">
             <h2 class="section-title">Find Your Doctor</h2>
             <input type="text" id="doctorSearch" placeholder="Search for a doctor by name...">
-
             <div class="filter-scroll-container">
                 <div class="filter-buttons">
                     <button class="filter-btn active" data-filter="all">All Specialists</button>
@@ -294,70 +95,56 @@
             </div>
 
             <div class="doctor-grid">
-                <div class="doctor-card" data-specialty="cardiology">
-                    <img src="https://placehold.co/400x400/E0F2FE/1E293B?text=Dr.+Smith" alt="Dr. Smith">
-                    <div class="doctor-info">
-                        <h3>Dr. Smith</h3>
-                        <p>Cardiologist</p>
-                        <a href="#" class="book-btn"
-                            onclick="bookDoctor('Dr. Smith','Cardiologist','https://placehold.co/400x400/E0F2FE/1E293B?text=Dr.+Smith')">Book
-                            Appointment</a>
-                    </div>
-                </div>
-                <div class="doctor-card" data-specialty="pediatrics">
-                    <img src="https://placehold.co/400x400/D1FAE5/1E293B?text=Dr.+Bennet" alt="Dr. Bennet">
-                    <div class="doctor-info">
-                        <h3>Dr. Bennet</h3>
-                        <p>Pediatrician</p>
-                        <a href="#" class="book-btn"
-                            onclick="bookDoctor('Dr. Bennet','Pediatrician','https://placehold.co/400x400/D1FAE5/1E293B?text=Dr.+Bennet')">Book
-                            Appointment</a>
-                    </div>
-                </div>
-                <div class="doctor-card" data-specialty="neurology">
-                    <img src="https://placehold.co/400x400/FEF3C7/1E293B?text=Dr.+Patel" alt="Dr. Patel">
-                    <div class="doctor-info">
-                        <h3>Dr. Patel</h3>
-                        <p>Neurologist</p>
-                        <a href="#" class="book-btn"
-                            onclick="bookDoctor('Dr. Patel','Neurologist','https://placehold.co/400x400/FEF3C7/1E293B?text=Dr.+Patel')">Book
-                            Appointment</a>
-                    </div>
-                </div>
-                <div class="doctor-card" data-specialty="dermatology">
-                    <img src="https://placehold.co/400x400/E5E7EB/1E293B?text=Dr.+Lee" alt="Dr. Lee">
-                    <div class="doctor-info">
-                        <h3>Dr. Lee</h3>
-                        <p>Dermatologist</p>
-                        <a href="#" class="book-btn"
-                            onclick="bookDoctor('Dr. Lee','Dermatologist','https://placehold.co/400x400/E5E7EB/1E293B?text=Dr.+Lee')">Book
-                            Appointment</a>
-                    </div>
-                </div>
-                <div class="doctor-card" data-specialty="orthopedics">
-                    <img src="https://placehold.co/400x400/DBEAFE/1E293B?text=Dr.+Jones" alt="Dr. Jones">
-                    <div class="doctor-info">
-                        <h3>Dr. Jones</h3>
-                        <p>Orthopedist</p>
-                        <a href="#" class="book-btn"
-                            onclick="bookDoctor('Dr. Jones','Orthopedist','https://placehold.co/400x400/DBEAFE/1E293B?text=Dr.+Jones')">Book
-                            Appointment</a>
-                    </div>
-                </div>
-                <div class="doctor-card" data-specialty="ent">
-                    <img src="https://placehold.co/400x400/F3E8FF/1E293B?text=Dr.+Chen" alt="Dr. Chen">
-                    <div class="doctor-info">
-                        <h3>Dr. Chen</h3>
-                        <p>ENT Specialist</p>
-                        <a href="#" class="book-btn"
-                            onclick="bookDoctor('Dr. Chen','ENT Specialist','https://placehold.co/400x400/F3E8FF/1E293B?text=Dr.+Chen')">Book
-                            Appointment</a>
-                    </div>
-                </div>
+                <div class="doctor-card" data-specialty="cardiology"><img src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=500&auto=format&fit=crop&q=60" alt="Dr. Smith"><div class="doctor-info"><h3>Dr. Smith</h3><p>Cardiologist</p><a href="#" class="book-btn" onclick="bookDoctor('Dr. Smith','Cardiologist','https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=500&auto=format&fit=crop&q=60')">Book Appointment</a></div></div>
+                <div class="doctor-card" data-specialty="cardiology"><img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=500&auto=format&fit=crop&q=60" alt="Dr. Vance"><div class="doctor-info"><h3>Dr. Eleanor Vance</h3><p>Cardiologist</p><a href="#" class="book-btn" onclick="bookDoctor('Dr. Eleanor Vance','Cardiologist','https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=500&auto=format&fit=crop&q=60')">Book Appointment</a></div></div>
+                <div class="doctor-card" data-specialty="cardiology"><img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=500&auto=format&fit=crop&q=60" alt="Dr. Thorne"><div class="doctor-info"><h3>Dr. Marcus Thorne</h3><p>Cardiologist</p><a href="#" class="book-btn" onclick="bookDoctor('Dr. Marcus Thorne','Cardiologist','https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=500&auto=format&fit=crop&q=60')">Book Appointment</a></div></div>
+                <div class="doctor-card" data-specialty="cardiology"><img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=500&auto=format&fit=crop&q=60" alt="Dr. Rossi"><div class="doctor-info"><h3>Dr. Sofia Rossi</h3><p>Cardiologist</p><a href="#" class="book-btn" onclick="bookDoctor('Dr. Sofia Rossi','Cardiologist','https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=500&auto=format&fit=crop&q=60')">Book Appointment</a></div></div>
+                <div class="doctor-card" data-specialty="cardiology"><img src="https://images.unsplash.com/photo-1612531386530-97286d97c2d2?w=500&auto=format&fit=crop&q=60" alt="Dr. Carter"><div class="doctor-info"><h3>Dr. Benjamin Carter</h3><p>Cardiologist</p><a href="#" class="book-btn" onclick="bookDoctor('Dr. Benjamin Carter','Cardiologist','https://images.unsplash.com/photo-1612531386530-97286d97c2d2?w=500&auto=format&fit=crop&q=60')">Book Appointment</a></div></div>
+                <div class="doctor-card" data-specialty="cardiology"><img src="https://media.istockphoto.com/id/1468678624/photo/nurse-hospital-employee-and-portrait-of-black-man-in-a-healthcare-wellness-and-clinic-feeling.jpg?s=612x612&w=0&k=20&c=AGQPyeEitUPVm3ud_h5_yVX4NKY9mVyXbFf50ZIEtQI=" alt="Dr. Williams"><div class="doctor-info"><h3>Dr. Olivia Williams</h3><p>Cardiologist</p><a href="#" class="book-btn" onclick="bookDoctor('Dr. Olivia Williams','Cardiologist','https://media.istockphoto.com/id/1468678624/photo/nurse-hospital-employee-and-portrait-of-black-man-in-a-healthcare-wellness-and-clinic-feeling.jpg?s=612x612&w=0&k=20&c=AGQPyeEitUPVm3ud_h5_yVX4NKY9mVyXbFf50ZIEtQI=')">Book Appointment</a></div></div>
+                <div class="doctor-card" data-specialty="cardiology"><img src="https://t4.ftcdn.net/jpg/01/36/18/77/360_F_136187711_qeBMOwkPdTg1dCN8e5TR1AmduXDz60Xn.jpg" alt="Dr. Hayes"><div class="doctor-info"><h3>Dr. Adrian Hayes</h3><p>Cardiologist</p><a href="#" class="book-btn" onclick="bookDoctor('Dr. Adrian Hayes','Cardiologist','https://t4.ftcdn.net/jpg/01/36/18/77/360_F_136187711_qeBMOwkPdTg1dCN8e5TR1AmduXDz60Xn.jpg')">Book Appointment</a></div></div>
+
+                <div class="doctor-card" data-specialty="pediatrics"><img src="https://img.freepik.com/premium-photo/confident-my-medical-ability-cropped-portrait-attractive-young-female-doctor-standing-with-her-arms-folded-office_590464-2228.jpg?w=740" alt="Dr. Bennet"><div class="doctor-info"><h3>Dr. Bennet</h3><p>Pediatrician</p><a href="#" class="book-btn" onclick="bookDoctor('Dr. Bennet','Pediatrician','https://img.freepik.com/premium-photo/confident-my-medical-ability-cropped-portrait-attractive-young-female-doctor-standing-with-her-arms-folded-office_590464-2228.jpg?w=740')">Book Appointment</a></div></div>
+                <div class="doctor-card" data-specialty="pediatrics"><img src="https://t4.ftcdn.net/jpg/02/60/04/09/360_F_260040900_oO6YW1sHTnKxby4GcjCvtypUCWjnQRg5.jpg" alt="Dr. Evans"><div class="doctor-info"><h3>Dr. Clara Evans</h3><p>Pediatrician</p><a href="#" class="book-btn" onclick="bookDoctor('Dr. Clara Evans','Pediatrician','https://t4.ftcdn.net/jpg/02/60/04/09/360_F_260040900_oO6YW1sHTnKxby4GcjCvtypUCWjnQRg5.jpg')">Book Appointment</a></div></div>
+                <div class="doctor-card" data-specialty="pediatrics"><img src="https://img.freepik.com/free-photo/female-doctor-hospital_23-2148827760.jpg?semt=ais_hybrid&w=740&q=80" alt="Dr. Rodriguez"><div class="doctor-info"><h3>Dr. Maya Rodriguez</h3><p>Pediatrician</p><a href="#" class="book-btn" onclick="bookDoctor('Dr. Maya Rodriguez','Pediatrician','https://img.freepik.com/free-photo/female-doctor-hospital_23-2148827760.jpg?semt=ais_hybrid&w=740&q=80')">Book Appointment</a></div></div>
+                <div class="doctor-card" data-specialty="pediatrics"><img src="https://snibbs.co/cdn/shop/articles/What_are_the_Challenges_of_Being_a_Doctor.jpg?v=1684314843" alt="Dr. Murphy"><div class="doctor-info"><h3>Dr. Liam Murphy</h3><p>Pediatrician</p><a href="#" class="book-btn" onclick="bookDoctor('Dr. Liam Murphy','Pediatrician','https://snibbs.co/cdn/shop/articles/What_are_the_Challenges_of_Being_a_Doctor.jpg?v=1684314843')">Book Appointment</a></div></div>
+                <div class="doctor-card" data-specialty="pediatrics"><img src="https://img.freepik.com/free-photo/woman-doctor-wearing-lab-coat-with-stethoscope-isolated_1303-29791.jpg?w=740" alt="Dr. Hall"><div class="doctor-info"><h3>Dr. Grace Hall</h3><p>Pediatrician</p><a href="#" class="book-btn" onclick="bookDoctor('Dr. Grace Hall','Pediatrician','https://img.freepik.com/free-photo/woman-doctor-wearing-lab-coat-with-stethoscope-isolated_1303-29791.jpg?w=740')">Book Appointment</a></div></div>
+                <div class="doctor-card" data-specialty="pediatrics"><img src="https://png.pngtree.com/png-clipart/20250205/original/pngtree-handsome-male-doctor-pose-smiling-png-image_19373313.png" alt="Dr. Kim"><div class="doctor-info"><h3>Dr. Noah Kim</h3><p>Pediatrician</p><a href="#" class="book-btn" onclick="bookDoctor('Dr. Noah Kim','Pediatrician','https://png.pngtree.com/png-clipart/20250205/original/pngtree-handsome-male-doctor-pose-smiling-png-image_19373313.png')">Book Appointment</a></div></div>
+                <div class="doctor-card" data-specialty="pediatrics"><img src="https://t3.ftcdn.net/jpg/05/04/25/70/360_F_504257032_jBtwqNdvdMN9Xm6aDT0hcvtxDXPZErrn.jpg" alt="Dr. Green"><div class="doctor-info"><h3>Dr. Samuel Green</h3><p>Pediatrician</p><a href="#" class="book-btn" onclick="bookDoctor('Dr. Samuel Green','Pediatrician','https://t3.ftcdn.net/jpg/05/04/25/70/360_F_504257032_jBtwqNdvdMN9Xm6aDT0hcvtxDXPZErrn.jpg')">Book Appointment</a></div></div>
+
+                <div class="doctor-card" data-specialty="neurology"><img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=500&auto=format&fit=crop&q=60" alt="Dr. Patel"><div class="doctor-info"><h3>Dr. Patel</h3><p>Neurologist</p><a href="#" class="book-btn" onclick="bookDoctor('Dr. Patel','Neurologist','https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=500&auto=format&fit=crop&q=60')">Book Appointment</a></div></div>
+                <div class="doctor-card" data-specialty="neurology"><img src="https://freerangestock.com/sample/147805/portrait-of-happy-female-doctor-smiling-in-hospital.jpg" alt="Dr. Bell"><div class="doctor-info"><h3>Dr. Isaac Bell</h3><p>Neurologist</p><a href="#" class="book-btn" onclick="bookDoctor('Dr. Isaac Bell','Neurologist','https://freerangestock.com/sample/147805/portrait-of-happy-female-doctor-smiling-in-hospital.jpg')">Book Appointment</a></div></div>
+                <div class="doctor-card" data-specialty="neurology"><img src="https://images.pexels.com/photos/5452293/pexels-photo-5452293.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Dr. Garcia"><div class="doctor-info"><h3>Dr. Ava Garcia</h3><p>Neurologist</p><a href="#" class="book-btn" onclick="bookDoctor('Dr. Ava Garcia','Neurologist','https://images.pexels.com/photos/5452293/pexels-photo-5452293.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')">Book Appointment</a></div></div>
+                <div class="doctor-card" data-specialty="neurology"><img src="https://images.pexels.com/photos/5215024/pexels-photo-5215024.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Dr. Wright"><div class="doctor-info"><h3>Dr. Julian Wright</h3><p>Neurologist</p><a href="#" class="book-btn" onclick="bookDoctor('Dr. Julian Wright','Neurologist','https://images.pexels.com/photos/5215024/pexels-photo-5215024.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')">Book Appointment</a></div></div>
+                <div class="doctor-card" data-specialty="neurology"><img src="https://t4.ftcdn.net/jpg/03/10/37/43/360_F_310374365_fiIJLNqEeYVbXO0PpyUauQvZRreCMEdr.jpg" alt="Dr. Martinez"><div class="doctor-info"><h3>Dr. Chloe Martinez</h3><p>Neurologist</p><a href="#" class="book-btn" onclick="bookDoctor('Dr. Chloe Martinez','Neurologist','https://t4.ftcdn.net/jpg/03/10/37/43/360_F_310374365_fiIJLNqEeYVbXO0PpyUauQvZRreCMEdr.jpg')">Book Appointment</a></div></div>
+                <div class="doctor-card" data-specialty="neurology"><img src="https://images.pexels.com/photos/5407206/pexels-photo-5407206.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Dr. Scott"><div class="doctor-info"><h3>Dr. Lucas Scott</h3><p>Neurologist</p><a href="#" class="book-btn" onclick="bookDoctor('Dr. Lucas Scott','Neurologist','https://images.pexels.com/photos/5407206/pexels-photo-5407206.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')">Book Appointment</a></div></div>
+                <div class="doctor-card" data-specialty="neurology"><img src="https://images.pexels.com/photos/5452201/pexels-photo-5452201.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Dr. Johnson"><div class="doctor-info"><h3>Dr. Emily Johnson</h3><p>Neurologist</p><a href="#" class="book-btn" onclick="bookDoctor('Dr. Emily Johnson','Neurologist','https://images.pexels.com/photos/5452201/pexels-photo-5452201.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')">Book Appointment</a></div></div>
+
+                <div class="doctor-card" data-specialty="dermatology"><img src="https://img.freepik.com/free-photo/pleased-young-female-doctor-wearing-medical-robe-stethoscope-around-neck-standing-with-closed-posture_409827-254.jpg?w=740" alt="Dr. Lee"><div class="doctor-info"><h3>Dr. Lee</h3><p>Dermatologist</p><a href="#" class="book-btn" onclick="bookDoctor('Dr. Lee','Dermatologist','https://img.freepik.com/free-photo/pleased-young-female-doctor-wearing-medical-robe-stethoscope-around-neck-standing-with-closed-posture_409827-254.jpg?w=740')">Book Appointment</a></div></div>
+                <div class="doctor-card" data-specialty="dermatology"><img src="https://img.freepik.com/free-photo/female-doctor-with-presenting-hand-white-background_1368-5034.jpg?w=740" alt="Dr. Clark"><div class="doctor-info"><h3>Dr. Isabella Clark</h3><p>Dermatologist</p><a href="#" class="book-btn" onclick="bookDoctor('Dr. Isabella Clark','Dermatologist','https://img.freepik.com/free-photo/female-doctor-with-presenting-hand-white-background_1368-5034.jpg?w=740')">Book Appointment</a></div></div>
+                <div class="doctor-card" data-specialty="dermatology"><img src="https://img.freepik.com/free-photo/doctor-with-his-arms-crossed-white-background_1368-5790.jpg?w=740" alt="Dr. Lewis"><div class="doctor-info"><h3>Dr. Henry Lewis</h3><p>Dermatologist</p><a href="#" class="book-btn" onclick="bookDoctor('Dr. Henry Lewis','Dermatologist','https://img.freepik.com/free-photo/doctor-with-his-arms-crossed-white-background_1368-5790.jpg?w=740')">Book Appointment</a></div></div>
+                <div class="doctor-card" data-specialty="dermatology"><img src="https://img.freepik.com/free-photo/beautiful-young-female-doctor-looking-camera-office_1301-7807.jpg?w=740" alt="Dr. Walker"><div class="doctor-info"><h3>Dr. Amelia Walker</h3><p>Dermatologist</p><a href="#" class="book-btn" onclick="bookDoctor('Dr. Amelia Walker','Dermatologist','https://img.freepik.com/free-photo/beautiful-young-female-doctor-looking-camera-office_1301-7807.jpg?w=740')">Book Appointment</a></div></div>
+                <div class="doctor-card" data-specialty="dermatology"><img src="https://img.freepik.com/free-photo/smiling-doctor-with-strethoscope-isolated-grey_651396-974.jpg?w=740" alt="Dr. Baker"><div class="doctor-info"><h3>Dr. Ethan Baker</h3><p>Dermatologist</p><a href="#" class="book-btn" onclick="bookDoctor('Dr. Ethan Baker','Dermatologist','https://img.freepik.com/free-photo/smiling-doctor-with-strethoscope-isolated-grey_651396-974.jpg?w=740')">Book Appointment</a></div></div>
+                <div class="doctor-card" data-specialty="dermatology"><img src="https://img.freepik.com/premium-photo/medical-concept-indian-beautiful-female-doctor-white-coat-with-stethoscope-waist-up-medical-student-woman-hospital-worker-looking-camera-smiling-studio-blue-background_185696-621.jpg?w=740" alt="Dr. Adams"><div class="doctor-info"><h3>Dr. Mia Adams</h3><p>Dermatologist</p><a href="#" class="book-btn" onclick="bookDoctor('Dr. Mia Adams','Dermatologist','https://img.freepik.com/premium-photo/medical-concept-indian-beautiful-female-doctor-white-coat-with-stethoscope-waist-up-medical-student-woman-hospital-worker-looking-camera-smiling-studio-blue-background_185696-621.jpg?w=740')">Book Appointment</a></div></div>
+                <div class="doctor-card" data-specialty="dermatology"><img src="https://img.freepik.com/free-photo/woman-doctor-wearing-lab-coat-with-stethoscope-isolated_1303-29791.jpg" alt="Dr. Nelson"><div class="doctor-info"><h3>Dr. Jacob Nelson</h3><p>Dermatologist</p><a href="#" class="book-btn" onclick="bookDoctor('Dr. Jacob Nelson','Dermatologist','https://img.freepik.com/free-photo/woman-doctor-wearing-lab-coat-with-stethoscope-isolated_1303-29791.jpg')">Book Appointment</a></div></div>
+
+                <div class="doctor-card" data-specialty="orthopedics"><img src="https://plus.unsplash.com/premium_photo-1658506671316-0b293df7c72b?w=500&auto=format&fit=crop&q=60" alt="Dr. Jones"><div class="doctor-info"><h3>Dr. Jones</h3><p>Orthopedist</p><a href="#" class="book-btn" onclick="bookDoctor('Dr. Jones','Orthopedist','https://plus.unsplash.com/premium_photo-1658506671316-0b293df7c72b?w=500&auto=format&fit=crop&q=60')">Book Appointment</a></div></div>
+                <div class="doctor-card" data-specialty="orthopedics"><img src="https://images.pexels.com/photos/8460157/pexels-photo-8460157.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Dr. Moore"><div class="doctor-info"><h3>Dr. Jackson Moore</h3><p>Orthopedist</p><a href="#" class="book-btn" onclick="bookDoctor('Dr. Jackson Moore','Orthopedist','https://images.pexels.com/photos/8460157/pexels-photo-8460157.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')">Book Appointment</a></div></div>
+                <div class="doctor-card" data-specialty="orthopedics"><img src="https://cdn.create.vista.com/api/media/small/218003704/stock-photo-smiling-young-female-doctor-medical-coat-writing-clipboard-isolated-white" alt="Dr. Taylor"><div class="doctor-info"><h3>Dr. Sophia Taylor</h3><p>Orthopedist</p><a href="#" class="book-btn" onclick="bookDoctor('Dr. Sophia Taylor','Orthopedist','https://cdn.create.vista.com/api/media/small/218003704/stock-photo-smiling-young-female-doctor-medical-coat-writing-clipboard-isolated-white')">Book Appointment</a></div></div>
+                <div class="doctor-card" data-specialty="orthopedics"><img src="https://images.pexels.com/photos/5214995/pexels-photo-5214995.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Dr. Hill"><div class="doctor-info"><h3>Dr. Daniel Hill</h3><p>Orthopedist</p><a href="#" class="book-btn" onclick="bookDoctor('Dr. Daniel Hill','Orthopedist','https://images.pexels.com/photos/5214995/pexels-photo-5214995.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')">Book Appointment</a></div></div>
+                <div class="doctor-card" data-specialty="orthopedics"><img src="https://media.istockphoto.com/id/1447381473/photo/smile-medical-and-arms-crossed-with-portrait-of-doctor-and-mockup-in-consulting-room-for.jpg?s=612x612&w=0&k=20&c=rHB5b477SWJKScxSN8mcqTRg3_zT1mDrs58Ug85DlhU=" alt="Dr. Anderson"><div class="doctor-info"><h3>Dr. Harper Anderson</h3><p>Orthopedist</p><a href="#" class="book-btn" onclick="bookDoctor('Dr. Harper Anderson','Orthopedist','https://media.istockphoto.com/id/1447381473/photo/smile-medical-and-arms-crossed-with-portrait-of-doctor-and-mockup-in-consulting-room-for.jpg?s=612x612&w=0&k=20&c=rHB5b477SWJKScxSN8mcqTRg3_zT1mDrs58Ug85DlhU=')">Book Appointment</a></div></div>
+                <div class="doctor-card" data-specialty="orthopedics"><img src="https://static.vecteezy.com/system/resources/thumbnails/050/817/819/small_2x/happy-smiling-male-doctor-with-hand-present-something-empty-space-standing-isolate-on-transparent-background-png.png" alt="Dr. Thomas"><div class="doctor-info"><h3>Dr. Matthew Thomas</h3><p>Orthopedist</p><a href="#" class="book-btn" onclick="bookDoctor('Dr. Matthew Thomas','Orthopedist','https://static.vecteezy.com/system/resources/thumbnails/050/817/819/small_2x/happy-smiling-male-doctor-with-hand-present-something-empty-space-standing-isolate-on-transparent-background-png.png')">Book Appointment</a></div></div>
+                <div class="doctor-card" data-specialty="orthopedics"><img src="https://t3.ftcdn.net/jpg/04/43/33/46/360_F_443334611_LWOYm4T463bkhZD8wTojJdeEzQ40DUWX.jpg" alt="Dr. White"><div class="doctor-info"><h3>Dr. Evelyn White</h3><p>Orthopedist</p><a href="#" class="book-btn" onclick="bookDoctor('Dr. Evelyn White','Orthopedist','https://t3.ftcdn.net/jpg/04/43/33/46/360_F_443334611_LWOYm4T463bkhZD8wTojJdeEzQ40DUWX.jpg')">Book Appointment</a></div></div>
+
+                <div class="doctor-card" data-specialty="ent"><img src="https://t3.ftcdn.net/jpg/02/60/04/08/360_F_260040863_fYxB1SnrzgJ9AOkcT0hoe7IEFtsPiHAD.jpg" alt="Dr. Chen"><div class="doctor-info"><h3>Dr. Chen</h3><p>ENT Specialist</p><a href="#" class="book-btn" onclick="bookDoctor('Dr. Chen','ENT Specialist','https://t3.ftcdn.net/jpg/02/60/04/08/360_F_260040863_fYxB1SnrzgJ9AOkcT0hoe7IEFtsPiHAD.jpg')">Book Appointment</a></div></div>
+                <div class="doctor-card" data-specialty="ent"><img src="https://t3.ftcdn.net/jpg/03/20/52/31/360_F_320523164_TX7OkjwBHBMiVwNlrCL8oERDanAlJOBN.jpg" alt="Dr. Miller"><div class="doctor-info"><h3>Dr. Alexander Miller</h3><p>ENT Specialist</p><a href="#" class="book-btn" onclick="bookDoctor('Dr. Alexander Miller','ENT Specialist','https://t3.ftcdn.net/jpg/03/20/52/31/360_F_320523164_TX7OkjwBHBMiVwNlrCL8oERDanAlJOBN.jpg')">Book Appointment</a></div></div>
+                <div class="doctor-card" data-specialty="ent"><img src="https://media.istockphoto.com/id/1346124900/photo/confident-successful-mature-doctor-at-hospital.jpg?s=612x612&w=0&k=20&c=S93n5iTDVG3_kJ9euNNUKVl9pgXTOdVQcI_oDGG-QlE=" alt="Dr. Harris"><div class="doctor-info"><h3>Dr. William Harris</h3><p>ENT Specialist</p<a href="#" class="book-btn" onclick="bookDoctor('Dr. William Harris','ENT Specialist','https://media.istockphoto.com/id/1346124900/photo/confident-successful-mature-doctor-at-hospital.jpg?s=612x612&w=0&k=20&c=S93n5iTDVG3_kJ9euNNUKVl9pgXTOdVQcI_oDGG-QlE=')">Book Appointment</a></div></div>
+                <div class="doctor-card" data-specialty="ent"><img src="https://img.freepik.com/premium-psd/female-doctor-png-isolated-transparent-background_723616-13046.jpg" alt="Dr. Martin"><div class="doctor-info"><h3>Dr. Abigail Martin</h3><p>ENT Specialist</p><a href="#" class="book-btn" onclick="bookDoctor('Dr. Abigail Martin','ENT Specialist','https://img.freepik.com/premium-psd/female-doctor-png-isolated-transparent-background_723616-13046.jpg')">Book Appointment</a></div></div>
+                <div class="doctor-card" data-specialty="ent"><img src="https://www.shutterstock.com/image-photo/portrait-asian-female-doctor-wearing-600nw-2502070973.jpg" alt="Dr. Thompson"><div class="doctor-info"><h3>Dr. James Thompson</h3><p>ENT Specialist</p><a href="#" class="book-btn" onclick="bookDoctor('Dr. James Thompson','ENT Specialist','https://www.shutterstock.com/image-photo/portrait-asian-female-doctor-wearing-600nw-2502070973.jpg')">Book Appointment</a></div></div>
+                <div class="doctor-card" data-specialty="ent"><img src="https://plus.unsplash.com/premium_photo-1664475450083-5c9eef17a191?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZmVtYWxlJTIwZG9jdG9yfGVufDB8fDB8fHww" alt="Dr. Davis"><div class="doctor-info"><h3>Dr. Elizabeth Davis</h3><p>ENT Specialist</p><a href="#" class="book-btn" onclick="bookDoctor('Dr. Elizabeth Davis','ENT Specialist','https://plus.unsplash.com/premium_photo-1664475450083-5c9eef17a191?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZmVtYWxlJTIwZG9jdG9yfGVufDB8fDB8fHww')">Book Appointment</a></div></div>
+                <div class="doctor-card" data-specialty="ent"><img src="https://t3.ftcdn.net/jpg/01/97/67/00/360_F_197670014_6oxmH8IKdB5WPRTKrATgdw6xM4dkt6cp.jpg" alt="Dr. Wilson"><div class="doctor-info"><h3>Dr. Charlotte Wilson</h3><p>ENT Specialist</p><a href="#" class="book-btn" onclick="bookDoctor('Dr. Charlotte Wilson','ENT Specialist','https://t3.ftcdn.net/jpg/01/97/67/00/360_F_197670014_6oxmH8IKdB5WPRTKrATgdw6xM4dkt6cp.jpg')">Book Appointment</a></div></div>
             </div>
         </div>
     </main>
-
     <footer class="footer">
         <p>&copy; 2025 Paradox Hospitals. All rights reserved.</p>
     </footer>
@@ -365,31 +152,24 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('logout-btn').addEventListener('click', function () {
-                localStorage.removeItem('paradoxUserName');
+                localStorage.clear();
                 window.location.href = 'index.html';
             });
-
             const searchInput = document.getElementById('doctorSearch');
             const filterButtons = document.querySelectorAll('.filter-btn');
             const doctorCards = document.querySelectorAll('.doctor-card');
-
             function filterAndSearch() {
                 const searchQuery = searchInput.value.toLowerCase();
                 const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
-
                 doctorCards.forEach(card => {
                     const doctorName = card.querySelector('h3').textContent.toLowerCase();
                     const doctorSpecialty = card.dataset.specialty;
-
                     const nameMatch = doctorName.includes(searchQuery);
                     const filterMatch = activeFilter === 'all' || doctorSpecialty === activeFilter;
-
                     card.style.display = (nameMatch && filterMatch) ? 'block' : 'none';
                 });
             }
-
             searchInput.addEventListener('keyup', filterAndSearch);
-
             filterButtons.forEach(button => {
                 button.addEventListener('click', function () {
                     filterButtons.forEach(btn => btn.classList.remove('active'));
@@ -398,12 +178,10 @@
                 });
             });
         });
-
         function bookDoctor(name, specialty, img) {
             const url = `appointment.html?doctor=${encodeURIComponent(name)}&specialty=${encodeURIComponent(specialty)}&img=${encodeURIComponent(img)}`;
             window.location.href = url;
         }
     </script>
 </body>
-
 </html>
