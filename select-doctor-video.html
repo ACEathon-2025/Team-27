@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Doctor for Video | Paradox Hospitals</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #201a4e;
+            --primary-light: #8b60ed;
+            --secondary-color: #f3f4f6;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --background-light: #ffffff;
+            --border-color: #e2e8f0;
+            --font-family: 'Poppins', 'Segoe UI', sans-serif;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: var(--font-family); }
+        body { background-color: #f9fafc; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .header { display: flex; justify-content: space-between; align-items: center; background: linear-gradient(to left, #8b60ed, #c3adf8); padding: 20px 60px; }
+        .logo img { height: 140px; width: 250px; }
+        #logout-btn { background-color: var(--primary-color); padding: 10px 20px; border-radius: 6px; font-weight: bold; color: #fff; border: none; cursor: pointer; transition: 0.3s ease; }
+        .sub-nav { background-color: var(--background-light); box-shadow: 0 2px 10px rgba(0,0,0,0.05); padding: 15px 0; position: sticky; top: 0; z-index: 1000; }
+        .sub-nav .container { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 30px; }
+        .sub-nav a { color: var(--text-dark); font-weight: 600; text-decoration: none; padding: 8px 12px; border-radius: 6px; transition: all 0.3s ease; }
+        .sub-nav a:hover, .sub-nav a.active { background-color: var(--primary-color); color: white; }
+        .search-bar { text-align: center; margin: 40px 0; }
+        .search-bar input { width: 100%; max-width: 500px; padding: 15px; font-size: 16px; border-radius: 8px; border: 1px solid var(--border-color); }
+        .doctors-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
+        .doctor-card { background: var(--background-light); border-radius: 12px; box-shadow: var(--shadow); text-align: center; padding: 25px; transition: transform 0.3s ease; }
+        .doctor-card:hover { transform: translateY(-5px); }
+        .doctor-card img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 15px; border: 4px solid var(--secondary-color); }
+        .doctor-card h3 { font-size: 20px; color: var(--primary-color); }
+        .doctor-card p { color: var(--text-light); font-weight: 600; margin-bottom: 20px; }
+        .book-btn { display: inline-block; text-decoration: none; background-color: var(--primary-color); color: white; padding: 12px 25px; border-radius: 6px; font-weight: 600; transition: background-color 0.3s ease; }
+        .book-btn:hover { background-color: #3a2d80; }
+        .no-results { text-align: center; font-size: 18px; color: var(--text-light); margin-top: 30px; padding: 20px; background: var(--secondary-color); border-radius: 8px; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo"><a href="home.html"><img src="paradox-logo.png" alt="Paradox Logo"></a></div>
+        <div class="user-nav"><button id="logout-btn">Log Out</button></div>
+    </header>
+    <nav class="sub-nav">
+        <div class="container">
+            <a href="home.html">Main Page</a>
+            <a href="hospital.html">Home</a>
+            <a href="book.html">Book Appointment</a>
+            <a href="blueprint.html">Hospital Blue Print</a>
+            <a href="select-doctor-video.html" class="active">Book Video Consultancy</a>
+            <a href="food.html">Order Food</a>
+            <a href="profile.html">My Profile</a>
+        </div>
+    </nav>
+    <main class="container">
+        <div class="search-bar">
+            <input type="text" id="doctor-search" placeholder="Search for a doctor or specialty...">
+        </div>
+        <div class="doctors-grid" id="doctors-grid">
+            </div>
+         <div id="no-results-message" class="no-results" style="display: none;">No doctors found matching your search.</div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('logout-btn').addEventListener('click', function () {
+                sessionStorage.clear();
+                window.location.href = 'index.html';
+            });
+
+            // --- UPDATED DOCTOR LIST ---
+            const doctors = [
+                { name: "Dr. Smith", specialty: "Cardiologist", img: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=500&auto=format&fit=crop&q=60" },
+                { name: "Dr. Eleanor Vance", specialty: "Cardiologist", img: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=500&auto=format&fit=crop&q=60" },
+                { name: "Dr. Marcus Thorne", specialty: "Cardiologist", img: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=500&auto=format&fit=crop&q=60" },
+                { name: "Dr. Sofia Rossi", specialty: "Cardiologist", img: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=500&auto=format&fit=crop&q=60" },
+                { name: "Dr. Benjamin Carter", specialty: "Cardiologist", img: "https://images.unsplash.com/photo-1612531386530-97286d97c2d2?w=500&auto=format&fit=crop&q=60" },
+                { name: "Dr. Olivia Williams", specialty: "Cardiologist", img: "https://media.istockphoto.com/id/1468678624/photo/nurse-hospital-employee-and-portrait-of-black-man-in-a-healthcare-wellness-and-clinic-feeling.jpg?s=612x612&w=0&k=20&c=AGQPyeEitUPVm3ud_h5_yVX4NKY9mVyXbFf50ZIEtQI=" },
+                { name: "Dr. Adrian Hayes", specialty: "Cardiologist", img: "https://t4.ftcdn.net/jpg/01/36/18/77/360_F_136187711_qeBMOwkPdTg1dCN8e5TR1AmduXDz60Xn.jpg" },
+                { name: "Dr. Bennet", specialty: "Pediatrician", img: "https://img.freepik.com/premium-photo/confident-my-medical-ability-cropped-portrait-attractive-young-female-doctor-standing-with-her-arms-folded-office_590464-2228.jpg?w=740" },
+                { name: "Dr. Clara Evans", specialty: "Pediatrician", img: "https://t4.ftcdn.net/jpg/02/60/04/09/360_F_260040900_oO6YW1sHTnKxby4GcjCvtypUCWjnQRg5.jpg" },
+                { name: "Dr. Maya Rodriguez", specialty: "Pediatrician", img: "https://img.freepik.com/free-photo/female-doctor-hospital_23-2148827760.jpg?semt=ais_hybrid&w=740&q=80" },
+                { name: "Dr. Liam Murphy", specialty: "Pediatrician", img: "https://snibbs.co/cdn/shop/articles/What_are_the_Challenges_of_Being_a_Doctor.jpg?v=1684314843" },
+                { name: "Dr. Grace Hall", specialty: "Pediatrician", img: "https://img.freepik.com/free-photo/woman-doctor-wearing-lab-coat-with-stethoscope-isolated_1303-29791.jpg?w=740" },
+                { name: "Dr. Noah Kim", specialty: "Pediatrician", img: "https://png.pngtree.com/png-clipart/20250205/original/pngtree-handsome-male-doctor-pose-smiling-png-image_19373313.png" },
+                { name: "Dr. Samuel Green", specialty: "Pediatrician", img: "https://t3.ftcdn.net/jpg/05/04/25/70/360_F_504257032_jBtwqNdvdMN9Xm6aDT0hcvtxDXPZErrn.jpg" },
+                { name: "Dr. Patel", specialty: "Neurologist", img: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=500&auto=format&fit=crop&q=60" },
+                { name: "Dr. Isaac Bell", specialty: "Neurologist", img: "https://freerangestock.com/sample/147805/portrait-of-happy-female-doctor-smiling-in-hospital.jpg" },
+                { name: "Dr. Ava Garcia", specialty: "Neurologist", img: "https://images.pexels.com/photos/5452293/pexels-photo-5452293.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+                { name: "Dr. Julian Wright", specialty: "Neurologist", img: "https://images.pexels.com/photos/5215024/pexels-photo-5215024.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+                { name: "Dr. Chloe Martinez", specialty: "Neurologist", img: "https://t4.ftcdn.net/jpg/03/10/37/43/360_F_310374365_fiIJLNqEeYVbXO0PpyUauQvZRreCMEdr.jpg" },
+                { name: "Dr. Lucas Scott", specialty: "Neurologist", img: "https://images.pexels.com/photos/5407206/pexels-photo-5407206.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+                { name: "Dr. Emily Johnson", specialty: "Neurologist", img: "https://images.pexels.com/photos/5452201/pexels-photo-5452201.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+                { name: "Dr. Lee", specialty: "Dermatologist", img: "https://img.freepik.com/free-photo/pleased-young-female-doctor-wearing-medical-robe-stethoscope-around-neck-standing-with-closed-posture_409827-254.jpg?w=740" },
+                { name: "Dr. Isabella Clark", specialty: "Dermatologist", img: "https://img.freepik.com/free-photo/female-doctor-with-presenting-hand-white-background_1368-5034.jpg?w=740" },
+                { name: "Dr. Henry Lewis", specialty: "Dermatologist", img: "https://img.freepik.com/free-photo/doctor-with-his-arms-crossed-white-background_1368-5790.jpg?w=740" },
+                { name: "Dr. Amelia Walker", specialty: "Dermatologist", img: "https://img.freepik.com/free-photo/beautiful-young-female-doctor-looking-camera-office_1301-7807.jpg?w=740" },
+                { name: "Dr. Ethan Baker", specialty: "Dermatologist", img: "https://img.freepik.com/free-photo/smiling-doctor-with-strethoscope-isolated-grey_651396-974.jpg?w=740" },
+                { name: "Dr. Mia Adams", specialty: "Dermatologist", img: "https://img.freepik.com/premium-photo/medical-concept-indian-beautiful-female-doctor-white-coat-with-stethoscope-waist-up-medical-student-woman-hospital-worker-looking-camera-smiling-studio-blue-background_185696-621.jpg?w=740" },
+                { name: "Dr. Jacob Nelson", specialty: "Dermatologist", img: "https://img.freepik.com/free-photo/woman-doctor-wearing-lab-coat-with-stethoscope-isolated_1303-29791.jpg" },
+                { name: "Dr. Jones", specialty: "Orthopedist", img: "https://plus.unsplash.com/premium_photo-1658506671316-0b293df7c72b?w=500&auto=format&fit=crop&q=60" },
+                { name: "Dr. Jackson Moore", specialty: "Orthopedist", img: "https://images.pexels.com/photos/8460157/pexels-photo-8460157.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+                { name: "Dr. Sophia Taylor", specialty: "Orthopedist", img: "https://cdn.create.vista.com/api/media/small/218003704/stock-photo-smiling-young-female-doctor-medical-coat-writing-clipboard-isolated-white" },
+                { name: "Dr. Daniel Hill", specialty: "Orthopedist", img: "https://images.pexels.com/photos/5214995/pexels-photo-5214995.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+                { name: "Dr. Harper Anderson", specialty: "Orthopedist", img: "https://media.istockphoto.com/id/1447381473/photo/smile-medical-and-arms-crossed-with-portrait-of-doctor-and-mockup-in-consulting-room-for.jpg?s=612x612&w=0&k=20&c=rHB5b477SWJKScxSN8mcqTRg3_zT1mDrs58Ug85DlhU=" },
+                { name: "Dr. Matthew Thomas", specialty: "Orthopedist", img: "https://static.vecteezy.com/system/resources/thumbnails/050/817/819/small_2x/happy-smiling-male-doctor-with-hand-present-something-empty-space-standing-isolate-on-transparent-background-png.png" },
+                { name: "Dr. Evelyn White", specialty: "Orthopedist", img: "https://t3.ftcdn.net/jpg/04/43/33/46/360_F_443334611_LWOYm4T463bkhZD8wTojJdeEzQ40DUWX.jpg" },
+                { name: "Dr. Chen", specialty: "ENT Specialist", img: "https://t3.ftcdn.net/jpg/02/60/04/08/360_F_260040863_fYxB1SnrzgJ9AOkcT0hoe7IEFtsPiHAD.jpg" },
+                { name: "Dr. Alexander Miller", specialty: "ENT Specialist", img: "https://t3.ftcdn.net/jpg/03/20/52/31/360_F_320523164_TX7OkjwBHBMiVwNlrCL8oERDanAlJOBN.jpg" },
+                { name: "Dr. William Harris", specialty: "ENT Specialist", img: "https://media.istockphoto.com/id/1346124900/photo/confident-successful-mature-doctor-at-hospital.jpg?s=612x612&w=0&k=20&c=S93n5iTDVG3_kJ9euNNUKVl9pgXTOdVQcI_oDGG-QlE=" },
+                { name: "Dr. Abigail Martin", specialty: "ENT Specialist", img: "https://img.freepik.com/premium-psd/female-doctor-png-isolated-transparent-background_723616-13046.jpg" },
+                { name: "Dr. James Thompson", specialty: "ENT Specialist", img: "https://www.shutterstock.com/image-photo/portrait-asian-female-doctor-wearing-600nw-2502070973.jpg" },
+                { name: "Dr. Elizabeth Davis", specialty: "ENT Specialist", img: "https://plus.unsplash.com/premium_photo-1664475450083-5c9eef17a191?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZmVtYWxlJTIwZG9jdG9yfGVufDB8fDB8fHww" },
+                { name: "Dr. Charlotte Wilson", specialty: "ENT Specialist", img: "https://t3.ftcdn.net/jpg/01/97/67/00/360_F_197670014_6oxmH8IKdB5WPRTKrATgdw6xM4dkt6cp.jpg" },
+            ];
+
+            const doctorsGrid = document.getElementById('doctors-grid');
+            const searchInput = document.getElementById('doctor-search');
+            const noResultsMessage = document.getElementById('no-results-message');
+
+            function displayDoctors(filteredDoctors) {
+                doctorsGrid.innerHTML = '';
+                if (filteredDoctors.length === 0) {
+                    noResultsMessage.style.display = 'block';
+                } else {
+                    noResultsMessage.style.display = 'none';
+                    filteredDoctors.forEach(doc => {
+                        const doctorCard = `
+                            <div class="doctor-card">
+                                <img src="${doc.img}" alt="Dr. ${doc.name}">
+                                <h3>${doc.name}</h3>
+                                <p>${doc.specialty}</p>
+                                <a href="video.html?doctor=${encodeURIComponent(doc.name)}&specialty=${encodeURIComponent(doc.specialty)}&img=${encodeURIComponent(doc.img)}" class="book-btn">Book Video Call</a>
+                            </div>`;
+                        doctorsGrid.innerHTML += doctorCard;
+                    });
+                }
+            }
+            
+            searchInput.addEventListener('input', function () {
+                const searchTerm = this.value.toLowerCase();
+                const filteredDoctors = doctors.filter(doc =>
+                    doc.name.toLowerCase().includes(searchTerm) ||
+                    doc.specialty.toLowerCase().includes(searchTerm)
+                );
+                displayDoctors(filteredDoctors);
+            });
+            
+            // Initial display of all doctors
+            displayDoctors(doctors);
+        });
+    </script>
+</body>
+</html>
