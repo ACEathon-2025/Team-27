@@ -212,6 +212,10 @@
             <p>Sign in to access your account.</p>
             <form class="signin-form" id="signInForm">
                 <div class="form-group">
+                    <label for="username">Name</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
                     <label for="email">Email Address</label>
                     <input type="email" id="email" name="email" placeholder="you@example.com" required>
                 </div>
@@ -244,14 +248,10 @@
         document.getElementById('signInForm').addEventListener('submit', function(event) {
             event.preventDefault();
 
-            const email = document.getElementById('email').value;
-
-            let userName = email.split('@')[0];
-            userName = userName.charAt(0).toUpperCase() + userName.slice(1);
+            const username = document.getElementById('username').value;
 
             localStorage.setItem('isLoggedIn', 'true');
-
-            localStorage.setItem('username', userName);
+            localStorage.setItem('username', username);
             
             window.location.href = 'home.html';
         });
