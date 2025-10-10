@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Food | Paradox Hospitals</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #201a4e;
+            --primary-light: #8b60ed;
+            --secondary-color: #f3f4f6;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --background-light: #ffffff;
+            --border-color: #e2e8f0;
+            --font-family: 'Poppins', 'Segoe UI', sans-serif;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font-family);
+        }
+
+        body {
+            background-color: #f9fafc;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to left, #8b60ed, #c3adf8);
+            padding: 20px 60px;
+        }
+
+        .logo img {
+            height: 140px;
+            width: 250px;
+        }
+
+        #logout-btn {
+            background-color: var(--primary-color);
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .sub-nav {
+            background-color: var(--background-light);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+
+        .sub-nav .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .sub-nav a {
+            color: var(--text-dark);
+            font-weight: 600;
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .sub-nav a.active, .sub-nav a:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        main {
+            padding: 40px 0;
+        }
+
+        #canteen-name {
+            text-align: center;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+        }
+
+        .food-categories {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            background: var(--secondary-color);
+            border: 2px solid var(--border-color);
+            padding: 10px 25px;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .category-btn.active, .category-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .food-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .food-card {
+            background: var(--background-light);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .food-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .food-info {
+            padding: 15px;
+            flex-grow: 1;
+        }
+        .food-info h4 {
+            font-size: 18px;
+            color: var(--text-dark);
+        }
+        .food-info .price {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--primary-light);
+            margin: 5px 0 15px;
+        }
+
+        .action-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+        .action-btn:hover {
+            background: #3a2d80;
+        }
+        .action-btn:disabled {
+            background-color: var(--text-light);
+            cursor: not-allowed;
+        }
+
+        #cart-icon {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--primary-color);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 1001;
+        }
+        #cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #f59e0b;
+            color: white;
+            font-size: 12px;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        .cart-modal {
+            display: none;
+            position: fixed;
+            z-index: 1002;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+            align-items: center;
+            justify-content: center;
+        }
+        .cart-modal-content {
+            background-color: #fefefe;
+            padding: 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 700px;
+        }
+        .cart-modal-content h2 { text-align: center; margin-bottom: 20px; }
+        .close-cart { float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
+        #cart-items { margin-bottom: 20px; max-height: 250px; overflow-y: auto;}
+        .cart-item { display: flex; align-items: center; justify-content: space-between; padding: 10px 5px; border-bottom: 1px solid var(--border-color); }
+        .cart-item-details { flex-grow: 1; }
+        .cart-item-controls { display: flex; align-items: center; gap: 10px; }
+        .quantity-btn, .remove-btn { background: none; border: 1px solid var(--border-color); cursor: pointer; width: 28px; height: 28px; border-radius: 50%; font-weight: bold; }
+        .remove-btn { color: #ef4444; border-color: #ef4444; }
+        #cart-total { text-align: right; font-size: 18px; font-weight: bold; margin-top: 20px; }
+
+        #checkout-form, #order-success-message { display: none; margin-top: 20px; text-align: center;}
+        .form-group { margin-bottom: 15px; text-align: left;}
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 600; }
+        .form-group input, .form-group select { width: 100%; padding: 10px; border-radius: 6px; border: 1px solid var(--border-color); }
+
+        #card-details-form, #upi-details-form { display: none; }
+        .success-icon { font-size: 48px; color: #16a34a; margin-bottom: 15px; }
+
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="logo">
+            <a href="home.html"><img src="paradox-logo.png" alt="Paradox Logo"></a>
+        </div>
+        <div class="user-nav">
+            <button id="logout-btn">Log Out</button>
+        </div>
+    </header>
+
+    <nav class="sub-nav">
+        <div class="container">
+            <a href="home.html">Main Page</a>
+            <a href="hospital.html">Home</a>
+            <a href="book.html">Book Appointment</a>
+            <a href="blueprint.html">Hospital Blue Print</a>
+            <a href="select-doctor-video.html">Book Video Consultancy</a>
+            <a href="food.html" class="active">Order Food</a>
+            <a href="profile.html">My Profile</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <h1 id="canteen-name">Canteen</h1>
+        <div class="food-categories"></div>
+        <div class="food-grid"></div>
+    </main>
+
+    <div id="cart-icon">
+        <i class="fas fa-shopping-cart"></i>
+        <span id="cart-count">0</span>
+    </div>
+
+    <div id="cart-modal" class="cart-modal">
+        <div class="cart-modal-content">
+            <span class="close-cart">&times;</span>
+            <div id="cart-view">
+                <h2>Your Cart</h2>
+                <div id="cart-items"></div>
+                <div id="cart-total"></div>
+                <button class="action-btn" id="checkout-btn" disabled>Proceed to Checkout</button>
+            </div>
+            <form id="checkout-form">
+                <h3>Delivery Details</h3>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="room-number">Room Number</label>
+                    <input type="text" id="room-number" required>
+                </div>
+                <h3>Payment</h3>
+                <div class="form-group">
+                    <label for="payment">Payment Method</label>
+                    <select id="payment">
+                        <option value="cod">Cash on Delivery</option>
+                        <option value="card">Credit/Debit Card</option>
+                        <option value="upi">UPI</option>
+                    </select>
+                </div>
+                <div id="card-details-form">
+                    <div class="form-group">
+                        <label for="card-number">Card Number</label>
+                        <input type="text" id="card-number" placeholder="1111 2222 3333 4444">
+                    </div>
+                     <div class="form-group">
+                        <label for="card-expiry">Expiry Date</label>
+                        <input type="text" id="card-expiry" placeholder="MM/YY">
+                    </div>
+                     <div class="form-group">
+                        <label for="card-cvv">CVV</label>
+                        <input type="text" id="card-cvv" placeholder="123">
+                    </div>
+                </div>
+                 <div id="upi-details-form">
+                    <div class="form-group">
+                        <label for="upi-id">UPI ID</label>
+                        <input type="text" id="upi-id" placeholder="yourname@upi">
+                    </div>
+                </div>
+                <button type="submit" class="action-btn">Confirm Order</button>
+            </form>
+            <div id="order-success-message">
+                <div class="success-icon"><i class="fas fa-check-circle"></i></div>
+                <h2>Order Placed Successfully!</h2>
+                <p>You can track the status of your order in your profile.</p>
+                <a href="profile.html" class="action-btn" style="text-decoration: none; margin-top: 20px;">Check Order Status</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const hospitalName = sessionStorage.getItem('selectedHospital') || 'Paradox Hospital';
+            document.getElementById('canteen-name').textContent = `${hospitalName} Canteen`;
+            document.getElementById('logout-btn').addEventListener('click', () => {
+                sessionStorage.clear();
+                window.location.href = 'index.html';
+            });
+            const foodData = {
+                juices: [
+                    { name: 'Orange Juice', price: '₹80', img: 'https://placehold.co/300x200/FDBA74/000000?text=Orange+Juice' },
+                    { name: 'Apple Juice', price: '₹90', img: 'https://placehold.co/300x200/FECACA/000000?text=Apple+Juice' }
+                ],
+                snacks: [
+                    { name: 'Veg Sandwich', price: '₹120', img: 'https://placehold.co/300x200/BFDBFE/000000?text=Sandwich' },
+                    { name: 'Samosa', price: '₹50', img: 'https://placehold.co/300x200/FDE68A/000000?text=Samosa' }
+                ],
+                breakfast: [
+                    { name: 'Idli Sambar', price: '₹100', img: 'https://placehold.co/300x200/E5E7EB/000000?text=Idli' },
+                    { name: 'Dosa', price: '₹150', img: 'https://placehold.co/300x200/FED7AA/000000?text=Dosa' }
+                ],
+                meals: [
+                    { name: 'Veg Thali', price: '₹250', img: 'https://placehold.co/300x200/D1FAE5/000000?text=Veg+Thali' },
+                    { name: 'Non-Veg Thali', price: '₹350', img: 'https://placehold.co/300x200/FBCFE8/000000?text=Non-Veg+Thali' }
+                ]
+            };
+
+            const categoriesContainer = document.querySelector('.food-categories');
+            const foodGrid = document.querySelector('.food-grid');
+            let cart = [];
+
+            function renderCategories() {
+                Object.keys(foodData).forEach((cat, index) => {
+                    const btn = document.createElement('button');
+                    btn.className = 'category-btn';
+                    if (index === 0) btn.classList.add('active');
+                    btn.textContent = cat.charAt(0).toUpperCase() + cat.slice(1);
+                    btn.dataset.category = cat;
+                    categoriesContainer.appendChild(btn);
+                });
+            }
+
+            function renderFoodItems(category) {
+                foodGrid.innerHTML = '';
+                foodData[category].forEach(item => {
+                    const card = `
+                        <div class="food-card">
+                            <img src="${item.img}" alt="${item.name}">
+                            <div class="food-info">
+                                <h4>${item.name}</h4>
+                                <p class="price">${item.price}</p>
+                            </div>
+                            <button class="action-btn" data-name="${item.name}" data-price="${item.price}">Add to Cart</button>
+                        </div>
+                    `;
+                    foodGrid.innerHTML += card;
+                });
+            }
+
+            categoriesContainer.addEventListener('click', (e) => {
+                if (e.target.matches('.category-btn')) {
+                    document.querySelector('.category-btn.active').classList.remove('active');
+                    e.target.classList.add('active');
+                    renderFoodItems(e.target.dataset.category);
+                }
+            });
+
+            foodGrid.addEventListener('click', e => {
+                if (e.target.matches('.action-btn')) {
+                    const name = e.target.dataset.name;
+                    const price = e.target.dataset.price;
+                    const existingItem = cart.find(item => item.name === name);
+                    if (existingItem) {
+                        existingItem.quantity++;
+                    } else {
+                        cart.push({ name, price, quantity: 1 });
+                    }
+                    updateCart();
+                }
+            });
+            
+            function updateCart() {
+                const cartCount = document.getElementById('cart-count');
+                const cartItemsContainer = document.getElementById('cart-items');
+                const cartTotalContainer = document.getElementById('cart-total');
+                const checkoutBtn = document.getElementById('checkout-btn');
+                
+                let totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+                cartCount.textContent = totalItems;
+
+                cartItemsContainer.innerHTML = '';
+                if(cart.length === 0) {
+                     cartItemsContainer.innerHTML = '<p style="text-align:center;">Your cart is empty.</p>';
+                     checkoutBtn.disabled = true;
+                     cartTotalContainer.innerHTML = '';
+                } else {
+                    cart.forEach((item, index) => {
+                        const cartItemHTML = `
+                         <div class="cart-item">
+                           <div class="cart-item-details">
+                                <strong>${item.name}</strong>
+                                <br>
+                                <small>${item.price}</small>
+                           </div>
+                            <div class="cart-item-controls">
+                                <button class="quantity-btn" data-index="${index}" data-action="decrease">-</button>
+                                <span>${item.quantity}</span>
+                                <button class="quantity-btn" data-index="${index}" data-action="increase">+</button>
+                                <button class="remove-btn" data-index="${index}">&times;</button>
+                            </div>
+                        </div>`;
+                        cartItemsContainer.innerHTML += cartItemHTML;
+                    });
+                    checkoutBtn.disabled = false;
+                    const totalPrice = cart.reduce((acc, item) => acc + (parseInt(item.price.replace('₹', '')) * item.quantity), 0);
+                    cartTotalContainer.innerHTML = `<strong>Total: ₹${totalPrice}</strong>`;
+                }
+            }
+
+            const cartItemsContainer = document.getElementById('cart-items');
+            cartItemsContainer.addEventListener('click', e => {
+                const target = e.target;
+                if (target.matches('.quantity-btn') || target.matches('.remove-btn')) {
+                    const index = parseInt(target.dataset.index);
+                    const action = target.dataset.action;
+
+                    if (target.matches('.remove-btn') || (action === 'decrease' && cart[index].quantity === 1)) {
+                        cart.splice(index, 1);
+                    } else if (action === 'decrease') {
+                        cart[index].quantity--;
+                    } else if (action === 'increase') {
+                        cart[index].quantity++;
+                    }
+                    updateCart();
+                }
+            });
+
+
+            const cartIcon = document.getElementById('cart-icon');
+            const cartModal = document.getElementById('cart-modal');
+            const closeCart = document.querySelector('.close-cart');
+            cartIcon.onclick = () => {
+                cartModal.style.display = 'flex';
+                document.getElementById('cart-view').style.display = 'block';
+                document.getElementById('checkout-form').style.display = 'none';
+                document.getElementById('order-success-message').style.display = 'none';
+                updateCart();
+            }
+            closeCart.onclick = () => cartModal.style.display = 'none';
+            window.onclick = (e) => { if (e.target == cartModal) cartModal.style.display = "none"; }
+
+            const checkoutBtn = document.getElementById('checkout-btn');
+            const checkoutForm = document.getElementById('checkout-form');
+            checkoutBtn.addEventListener('click', () => {
+                document.getElementById('cart-view').style.display = 'none';
+                checkoutForm.style.display = 'block';
+            });
+            
+            const paymentSelect = document.getElementById('payment');
+            const cardDetailsForm = document.getElementById('card-details-form');
+            const upiDetailsForm = document.getElementById('upi-details-form');
+            paymentSelect.addEventListener('change', () => {
+                cardDetailsForm.style.display = paymentSelect.value === 'card' ? 'block' : 'none';
+                upiDetailsForm.style.display = paymentSelect.value === 'upi' ? 'block' : 'none';
+            });
+
+            checkoutForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const orderDetails = {
+                    type: 'food',
+                    hospitalName,
+                    items: cart,
+                    total: cart.reduce((acc, item) => acc + (parseInt(item.price.replace('₹', '')) * item.quantity), 0),
+                    patientName: document.getElementById('name').value,
+                    room: document.getElementById('room-number').value,
+                    payment: document.getElementById('payment').value,
+                    date: new Date().toLocaleDateString('en-GB').split('/').join('-'),
+                    id: `FOOD-${Date.now()}`
+                };
+
+                const existingOrders = JSON.parse(sessionStorage.getItem('foodOrders')) || [];
+                existingOrders.push(orderDetails);
+                sessionStorage.setItem('foodOrders', JSON.stringify(existingOrders));
+
+                checkoutForm.style.display = 'none';
+                document.getElementById('order-success-message').style.display = 'block';
+                cart = [];
+                updateCart();
+            });
+
+            renderCategories();
+            renderFoodItems('juices');
+            updateCart();
+        });
+    </script>
+</body>
+</html>
+
