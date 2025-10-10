@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment Status | Paradox Hospitals</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #201a4e;
+            --primary-light: #8b60ed;
+            --secondary-color: #f3f4f6;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --background-light: #ffffff;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', var(--font-family); }
+        body { background-color: #f9fafc; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .status-card { background: var(--background-light); padding: 40px; border-radius: 12px; box-shadow: var(--shadow); width: 100%; max-width: 500px; text-align: center; }
+        .doctor-details { display: flex; align-items: center; gap: 20px; justify-content: center; margin-bottom: 30px; }
+        .doctor-details img { width: 80px; height: 80px; border-radius: 50%; }
+        .doctor-details h2 { font-size: 24px; color: var(--primary-color); }
+        .token-display h3 { font-size: 20px; color: var(--text-light); }
+        .token-display .token-number { font-size: 80px; font-weight: 700; color: var(--primary-color); margin: 10px 0; }
+        .wait-time { margin-top: 20px; font-size: 18px; }
+        .back-btn { display: inline-block; margin-top: 30px; text-decoration: none; background-color: var(--primary-color); color: white; padding: 12px 24px; border-radius: 6px; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <div class="status-card">
+        <div id="status-content">
+            </div>
+        <a href="profile.html" class="back-btn">Back to My Profile</a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const statusContent = document.getElementById('status-content');
+            const appointment = JSON.parse(sessionStorage.getItem('selectedAppointment'));
+
+            if (!appointment) {
+                statusContent.innerHTML = '<h2>Error</h2><p>No appointment details found. Please go back.</p>';
+                return;
+            }
+
+            // Simple logic for current token and wait time
+            const currentToken = Math.max(1, appointment.token - Math.floor(Math.random() * 3));
+            const waitTime = (appointment.token - currentToken) * 15; // Assuming 15 mins per patient
+
+            statusContent.innerHTML = `
+                <div class="doctor-details">
+                    <img src="${appointment.img}" alt="Dr. ${appointment.doctor}">
+                    <div>
+                        <h2>Dr. ${appointment.doctor}</h2>
+                        <p>${appointment.specialty}</p>
+                    </div>
+                </div>
+                <div class="token-display">
+                    <h3>Your Token Number is</h3>
+                    <p class="token-number">#${appointment.token}</p>
+                    <h3>Currently Serving: #${currentToken}</h3>
+                </div>
+                <div class="wait-time">
+                    <p><strong><i class="fas fa-clock"></i> Estimated Wait Time:</strong> Approximately ${waitTime} minutes</p>
+                </div>
+            `;
+        });
+    </script>
+</body>
+</html>
