@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Paradise Hospitals</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     /* General Styles */
     * {
@@ -190,6 +191,79 @@
     .popup button { background-color: #201a4e; color: white; border: none; padding: 10px 20px; border-radius: 6px; font-weight: bold; cursor: pointer; transition: 0.3s ease; }
     .popup button:hover { background-color: #3a2d80; transform: scale(1.05); }
     @keyframes popupFade { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+          #chat-toggle-btn {
+            position: fixed;
+            right: 25px;
+            bottom: 125px;
+            background: linear-gradient(to top, #201a4e, #6028e5);
+            height: 90px;
+            width: 90px;
+            border-radius: 50%;
+            color: white;
+            display: flex; 
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        #chat-toggle-btn:hover {
+            transform: scale(1.1);
+        }
+        #chat-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 370px;
+            height: 520px;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            background-color: white;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+            overflow: hidden;
+            transform: scale(0);
+            transform-origin: bottom right;
+            transition: transform 0.3s ease-in-out;
+            z-index: 999;
+        }
+        #chat-container.show-chat {
+            transform: scale(1);
+        }
+        #chat-header {
+            background-color: #201a4e;
+            color: white;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            position: relative;
+        }
+        #chat-box { flex-grow: 1; padding: 15px; overflow-y: auto; }
+        #chat-box .message { margin: 10px 0; padding: 10px 15px; border-radius: 18px; max-width: 85%; line-height: 1.5; }
+        #chat-box .user { background-color: #007bff; color: white; margin-left: auto; }
+        #chat-box .bot { background-color: #e9e9eb; color: black; margin-right: auto; }
+        #input-form { display: flex; padding: 10px; border-top: 1px solid #eee; }
+        #user-input { flex-grow: 1; border: 1px solid #ccc; border-radius: 18px; padding: 10px; font-size: 16px; }
+        #user-input:focus { outline: none; border-color: #007bff; }
+        #send-btn { background-color: #007bff; color: white; border: none; border-radius: 50%; width: 40px; height: 40px; min-width: 40px; margin-left: 10px; cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center; }
+        #send-btn:hover { background-color: #0056b3; }
+        #close-chat-btn {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 28px;
+            font-weight: normal;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        #close-chat-btn:hover {
+            color: #ffc1c1;
+        }
+
   </style>
 </head>
 
@@ -309,6 +383,24 @@
     </div>
   </section>
 
+
+          <div id="chat-toggle-btn">
+        <i class="fas fa-comment-dots"></i>
+    </div>
+    <div id="chat-container">
+        <div id="chat-header">
+            AI Health Assistant
+            <span id="close-chat-btn">&times;</span>
+        </div>
+        <div id="chat-box">
+            <div class="message bot">Hello! I'm your AI Health Assistant. How can I help you today? Please note, I am not a substitute for professional medical advice.</div>
+        </div>
+        <form id="input-form">
+            <input type="text" id="user-input" placeholder="Type a message..." required>
+            <button type="submit" id="send-btn">➤</button>
+        </form>
+    </div>
+
   <footer>
     <div class="foot">
       <div class="details">
@@ -406,6 +498,85 @@
         }
       });
     });
+    const API_KEY = 'AIzaSyC5g9nrgykymNp6sLNgpAL1Zur9hmeOkO8';
+
+// Get references to the chatbot elements from the HTML
+const chatContainer = document.getElementById('chat-container');
+const chatToggleButton = document.getElementById('chat-toggle-btn');
+const closeChatBtn = document.getElementById('close-chat-btn');
+const chatBox = document.getElementById('chat-box');
+const userInput = document.getElementById('user-input');
+const inputForm = document.getElementById('input-form');
+const sendBtn = document.getElementById('send-btn');
+
+// Logic to open the chat when the floating button is clicked
+chatToggleButton.addEventListener('click', () => {
+    chatContainer.classList.add('show-chat');
+    chatToggleButton.style.display = 'none'; // Hide the button
+});
+
+// Logic to close the chat when the '×' is clicked
+closeChatBtn.addEventListener('click', () => {
+    chatContainer.classList.remove('show-chat');
+    // Use a timeout to make the button reappear after the window has closed
+    setTimeout(() => {
+        chatToggleButton.style.display = 'flex';
+    }, 300); // 300ms matches the CSS transition time
+});
+
+// Logic to handle sending messages
+inputForm.addEventListener('submit', async (e) => {
+    e.preventDefault(); 
+    const userMessage = userInput.value.trim();
+    if (!userMessage) return;
+
+    addMessage(userMessage, 'user');
+    userInput.value = '';
+    sendBtn.disabled = true;
+    addMessage("...", 'bot');
+
+    try {
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=AIzaSyC5g9nrgykymNp6sLNgpAL1Zur9hmeOkO8`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                contents: [{ parts: [{ text: "You are an AI health assistant for a pradox hospital. Be helpful and informative give respose simple and short, but always remind users to consult a real doctor for serious issues. Here is the user's query: " + userMessage }] }]
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error(`API request failed with status ${response.status}`);
+        }
+
+        const data = await response.json();
+        const botMessage = data.candidates[0].content.parts[0].text;
+        
+        // Remove the typing indicator
+        const typingIndicator = chatBox.querySelector('.message.bot:last-child');
+        if (typingIndicator && typingIndicator.textContent === "...") {
+            typingIndicator.remove();
+        }
+        addMessage(botMessage, 'bot');
+
+    } catch (error) {
+        console.error('Error:', error);
+        const typingIndicator = chatBox.querySelector('.message.bot:last-child');
+        if (typingIndicator && typingIndicator.textContent === "...") {
+            typingIndicator.textContent = `Sorry, something went wrong. Details: ${error.message}`;
+        } else {
+            addMessage(`Sorry, something went wrong. Details: ${error.message}`, 'bot');
+        }
+    } finally {
+        sendBtn.disabled = false;
+    }
+});
+function addMessage(text, sender) {
+    const messageElement = document.createElement('div');
+    messageElement.classList.add('message', sender);
+    messageElement.textContent = text;
+    chatBox.appendChild(messageElement);
+    chatBox.scrollTop = chatBox.scrollHeight;
+}
   </script>
 </body>
 </html>
