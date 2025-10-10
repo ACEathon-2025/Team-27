@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Profile | Paradox Hospitals</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary-color: #201a4e;
@@ -18,256 +18,195 @@
             --font-family: 'Poppins', 'Segoe UI', sans-serif;
             --shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
         }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: var(--font-family); }
+        body { background-color: #f9fafc; color: var(--text-dark); line-height: 1.6; }
+        a { text-decoration: none; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .header { display: flex; justify-content: space-between; align-items: center; background: linear-gradient(to left, #8b60ed, #c3adf8); padding: 20px 60px; }
+        .logo img { height: 140px; width: 250px; }
+        #logout-btn { background-color: var(--primary-color); padding: 10px 20px; border-radius: 6px; font-weight: bold; color: #fff; border: none; cursor: pointer; transition: 0.3s ease; }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: var(--font-family);
-        }
+        .main-nav { background-color: var(--background-light); box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); padding: 15px 0; }
+        .main-nav .container { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 30px; }
+        .main-nav a { color: var(--text-dark); font-weight: 600; padding: 8px 12px; border-radius: 6px; transition: all 0.3s ease; }
+        .main-nav a:hover, .main-nav a.active { background-color: var(--primary-color); color: white; }
 
-        body {
-            background-color: #f9fafc;
-            color: var(--text-dark);
-            line-height: 1.6;
-        }
+        .profile-nav { display: flex; justify-content: center; gap: 10px; margin-bottom: 40px; border-bottom: 1px solid var(--border-color); }
+        .profile-nav button { background: none; border: none; padding: 15px 25px; font-size: 18px; font-weight: 600; cursor: pointer; color: var(--text-light); border-bottom: 3px solid transparent; transition: all 0.3s ease; }
+        .profile-nav button.active { color: var(--primary-color); border-bottom-color: var(--primary-color); }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        
+        .card { background: var(--background-light); border-radius: 12px; box-shadow: var(--shadow); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; padding: 20px; margin-bottom: 20px; gap: 20px; }
+        .card-main-content { display: flex; align-items: center; gap: 20px; flex-grow: 1; }
+        .card img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; }
+        .card-info h3 { font-size: 20px; color: var(--primary-color); margin-bottom: 5px; }
+        .card-info p { font-weight: 600; margin: 2px 0; font-size: 15px; }
+        
+        .status-btn { background-color: var(--primary-color); color: white; padding: 12px 24px; border-radius: 6px; font-weight: 600; transition: all 0.3s ease; cursor: pointer; border: none; }
+        .status-btn:hover { background-color: #3a2d80; }
+        .status-btn:disabled { background-color: var(--text-light); cursor: not-allowed; opacity: 0.7; }
 
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: linear-gradient(to left, #8b60ed, #c3adf8);
-            padding: 20px 60px;
+        .placeholder-message { text-align: center; padding: 50px; background: var(--background-light); border-radius: 12px; }
+        
+        /* New Styles for Order Status */
+        .order-status-details {
+            display: none;
+            width: 100%;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
         }
-
-        .logo img {
-            height: 140px;
-            width: 250px;
-        }
-
-        nav a {
-            text-decoration: none;
-        }
-
-        .sub-nav {
-            background-color: var(--background-light);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            padding: 15px 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .sub-nav .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 30px;
-        }
-
-        .sub-nav a {
-            color: var(--text-dark);
-            font-weight: 600;
-            padding: 8px 12px;
-            border-radius: 6px;
-            transition: all 0.3s ease;
-        }
-
-        .sub-nav a:hover,
-        .sub-nav a.active {
-            background-color: var(--primary-color);
-            color: white;
-        }
-
-        #logout-btn {
-            background-color: var(--primary-color);
-            padding: 10px 20px;
-            border-radius: 6px;
-            font-weight: bold;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            transition: 0.3s ease;
-        }
-
-        #logout-btn:hover {
-            background-color: #3a2d80;
-            transform: scale(1.05);
-        }
-
-        h2.section-title {
-            text-align: center;
-            font-size: 36px;
-            color: var(--primary-color);
-            margin-bottom: 40px;
-        }
-
-        .appointment-card {
-            background: var(--background-light);
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 20px;
-            margin-bottom: 20px;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .appointment-details {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            flex-grow: 1;
-        }
-
-        .appointment-card img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        .appointment-info h3 {
-            font-size: 20px;
-            color: var(--primary-color);
-            margin-bottom: 5px;
-        }
-
-        .appointment-info p {
-            font-weight: 600;
-            margin: 2px 0;
-        }
-
-        .no-appointments {
-            text-align: center;
-            font-size: 20px;
-            color: var(--text-light);
-            margin-top: 50px;
-        }
-
-        .status-btn {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 6px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: background-color 0.3s ease;
-            cursor: pointer;
-            border: none;
-        }
-
-        .status-btn:hover {
-            background-color: #3a2d80;
-        }
-
-        .footer {
-            background-color: var(--text-dark);
-            text-align: center;
-            padding: 20px;
-            color: #e2e8f0;
-            font-size: 14px;
-            margin-top: 60px;
-        }
-
-        @media (max-width: 600px) {
-            .appointment-card {
-                flex-direction: column;
-                text-align: center;
-            }
-        }
+        .order-status-details h4 { margin-bottom: 10px; font-size: 16px; }
+        .order-status-details p { font-size: 15px; margin-bottom: 5px; }
     </style>
 </head>
-
 <body>
     <header class="header">
         <div class="logo"><a href="home.html"><img src="paradox-logo.png" alt="Paradox Logo"></a></div>
         <div class="user-nav"><button id="logout-btn">Log Out</button></div>
     </header>
-    <nav class="sub-nav">
+
+    <nav class="main-nav">
         <div class="container">
             <a href="home.html">Main Page</a>
             <a href="hospital.html">Home</a>
             <a href="book.html">Book Appointment</a>
-            <a href="blueprint.html">Hospital Blue Print</a>
-            <a href="video.html">Book Video Consultancy</a>
+            <a href="select-doctor-video.html">Video Consultancy</a>
             <a href="food.html">Order Food</a>
             <a href="profile.html" class="active">My Profile</a>
         </div>
     </nav>
+
     <main class="container">
-        <h2 class="section-title" id="profile-title">My Appointments</h2>
-        <div id="appointments-list"></div>
+        <nav class="profile-nav">
+            <button class="tab-btn active" data-tab="appointments">My Appointments</button>
+            <button class="tab-btn" data-tab="consultations">My Video Consultations</button>
+            <button class="tab-btn" data-tab="orders">My Orders</button>
+        </nav>
+
+        <div id="appointments" class="tab-content active"></div>
+        <div id="consultations" class="tab-content"></div>
+        <div id="orders" class="tab-content"></div>
     </main>
-    <footer class="footer">
-        <p>&copy; 2025 Paradox Hospitals. All rights reserved.</p>
-    </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            document.getElementById('logout-btn').addEventListener('click', function () { localStorage.clear(); window.location.href = 'signin.html'; });
+            document.getElementById('logout-btn').addEventListener('click', () => { sessionStorage.clear(); window.location.href = 'signin.html'; });
 
-            const selectedHospital = localStorage.getItem('selectedHospital') || 'Paradox General';
-            document.getElementById('profile-title').textContent = `My Appointments at ${selectedHospital}`;
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    document.getElementById(button.dataset.tab).classList.add('active');
+                });
+            });
 
-            const allAppointments = JSON.parse(localStorage.getItem('appointments')) || [];
-            const hospitalSpecificAppointments = allAppointments.filter(app => app.hospitalName === selectedHospital);
+            // --- DATE LOGIC ---
+            const today = new Date();
+            const todayFormatted = `${String(today.getDate()).padStart(2, '0')}-${String(today.getMonth() + 1).padStart(2, '0')}-${today.getFullYear()}`;
 
-            const appointmentsList = document.getElementById('appointments-list');
+            // --- APPOINTMENT & CONSULTATION LOGIC ---
+            const allBookings = JSON.parse(sessionStorage.getItem('appointments')) || [];
+            const physicalAppointments = allBookings.filter(app => app.type !== 'video');
+            const videoConsultations = allBookings.filter(app => app.type === 'video');
+            const appointmentsList = document.getElementById('appointments');
+            const consultationsList = document.getElementById('consultations');
 
-            if (hospitalSpecificAppointments.length === 0) {
-                appointmentsList.innerHTML = `<p class="no-appointments">You have no booked appointments at ${selectedHospital} yet.</p>`;
-            } else {
-                appointmentsList.innerHTML = '';
-                const today = new Date();
-                const d = String(today.getDate()).padStart(2, '0');
-                const m = String(today.getMonth() + 1).padStart(2, '0');
-                const y = today.getFullYear();
-                const todayFormatted = `${d}-${m}-${y}`;
-
-                hospitalSpecificAppointments.forEach((app, index) => {
-                    let tokenHTML = '';
-                    if (app.date === todayFormatted) {
-                        tokenHTML = `<p><strong>Token No:</strong> ${app.token}</p>`;
-                    }
+            function renderBookings(listElement, bookings, type) {
+                if (bookings.length === 0) {
+                    listElement.innerHTML = `<div class="placeholder-message"><h2>No ${type} found.</h2></div>`;
+                    return;
+                }
+                bookings.forEach((app, index) => {
+                    const isToday = app.date === todayFormatted;
                     const card = document.createElement('div');
-                    card.classList.add('appointment-card');
+                    card.classList.add('card');
                     card.innerHTML = `
-                        <div class="appointment-details">
-                            <img src="${app.img}" alt="${app.doctor}">
-                            <div class="appointment-info">
-                                <h3>${app.doctor}</h3>
-                                <p>${app.specialty}</p>
-                                <p><strong>Patient:</strong> ${app.patientName}</p>
-                                <p><strong>Date:</strong> ${app.date}</p>
-                                ${tokenHTML}
+                        <div class="card-main-content">
+                            <img src="${app.img}" alt="Dr. ${app.doctor}">
+                            <div class="card-info">
+                                <h3>Dr. ${app.doctor}</h3>
+                                <p>${app.specialty} at ${app.hospitalName}</p>
+                                <p><strong>Date:</strong> ${app.date} | <strong>Time:</strong> ${app.time}</p>
                             </div>
                         </div>
-                        <button class="status-btn" data-index="${index}">Check Status</button>
+                        <button class="status-btn" data-type="${type}" data-index="${index}" ${!isToday ? 'disabled' : ''}>
+                            ${isToday ? 'Check Status' : 'Status available on appointment day'}
+                        </button>
                     `;
-                    appointmentsList.appendChild(card);
+                    listElement.appendChild(card);
                 });
             }
 
-            appointmentsList.addEventListener('click', function (event) {
-                if (event.target.classList.contains('status-btn')) {
-                    const appointmentIndex = event.target.getAttribute('data-index');
-                    const selectedAppointment = hospitalSpecificAppointments[appointmentIndex];
-                    localStorage.setItem('selectedAppointment', JSON.stringify(selectedAppointment));
-                    window.location.href = 'analytic.html';
+            renderBookings(appointmentsList, physicalAppointments, 'Appointments');
+            renderBookings(consultationsList, videoConsultations, 'Video Consultations');
+
+            // --- FOOD ORDER LOGIC ---
+            const ordersList = document.getElementById('orders');
+            const allOrders = JSON.parse(sessionStorage.getItem('foodOrders')) || [];
+
+            if (allOrders.length === 0) {
+                ordersList.innerHTML = `<div class="placeholder-message"><h2>You have no past orders.</h2></div>`;
+            } else {
+                allOrders.reverse().forEach(order => {
+                    const card = document.createElement('div');
+                    card.classList.add('card');
+                    card.innerHTML = `
+                        <div class="card-main-content">
+                            <i class="fas fa-utensils fa-3x" style="color: var(--primary-light); margin: 0 30px;"></i>
+                            <div class="card-info">
+                                <h3>Order ID: ${order.id}</h3>
+                                <p><strong>Total:</strong> ₹${order.total} | <strong>Date:</strong> ${order.date}</p>
+                            </div>
+                        </div>
+                        <button class="status-btn" data-type="food" data-target="status-${order.id}">Check Status</button>
+                        <div class="order-status-details" id="status-${order.id}"></div>
+                    `;
+                    ordersList.appendChild(card);
+                });
+            }
+
+            // --- EVENT LISTENER FOR ALL STATUS BUTTONS ---
+            document.body.addEventListener('click', function(event) {
+                const button = event.target.closest('.status-btn');
+                if (!button || button.disabled) return;
+
+                const type = button.getAttribute('data-type');
+                
+                if (type === 'Appointments' || type === 'Video Consultations') {
+                    const index = parseInt(button.getAttribute('data-index'));
+                    const bookingData = (type === 'Appointments') ? physicalAppointments : videoConsultations;
+                    sessionStorage.setItem('selectedAppointment', JSON.stringify(bookingData[index]));
+                    window.location.href = 'status.html';
+                } else if (type === 'food') {
+                    const targetId = button.getAttribute('data-target');
+                    const statusDiv = document.getElementById(targetId);
+                    
+                    if (statusDiv.style.display === 'block') {
+                        statusDiv.style.display = 'none';
+                        button.textContent = 'Check Status';
+                    } else {
+                        const deliveryTime = new Date(Date.now() + (Math.floor(Math.random() * 21) + 20) * 60000);
+                        const timeString = deliveryTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+
+                        statusDiv.innerHTML = `
+                            <h4>Live Status</h4>
+                            <p><strong>Order Confirmed:</strong> <i class="fas fa-check-circle" style="color: green;"></i></p>
+                            <p><strong>In the Kitchen:</strong> <i class="fas fa-check-circle" style="color: green;"></i></p>
+                            <p><strong>Out for Delivery:</strong> <i class="fas fa-spinner fa-spin"></i></p>
+                            <p style="margin-top: 10px;"><strong>Estimated Delivery:</strong> ${timeString}</p>
+                        `;
+                        statusDiv.style.display = 'block';
+                        button.textContent = 'Hide Status';
+                    }
                 }
             });
         });
     </script>
 </body>
-
 </html>
