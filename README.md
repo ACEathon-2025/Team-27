@@ -152,19 +152,6 @@ Team-27/
 ├── chatbot.html
 ├── status.html
 │
-├── assets/
-│
-├── css/
-│   └── style.css
-│
-├── js/
-│   ├── main.js
-│   ├── auth.js
-│   ├── hospital.js
-│   ├── appointment.js
-│   ├── chatbot.js
-│   └── blueprint.js
-│
 ├── images/
 │   └── logo.png
 │
